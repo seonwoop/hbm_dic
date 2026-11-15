@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HBM 공정 5 · 언더필과 몰딩 (갭 필 및 보호)</title>
+<meta name="description" content="적층된 HBM 다이 사이의 미세 틈을 수지로 채우고 몰딩으로 감싸는 공정을 애니메이션으로 이해한다.">
+<link rel="stylesheet" href="style.css">
+<style>
+.steps{list-style:none;padding:0;margin-top:30px;display:grid;gap:18px}
+.steps li{background:var(--card);border-radius:24px;padding:26px 28px;box-shadow:0 2px 20px rgba(0,0,0,.06)}
+.steps li p{margin-top:4px}
+.ctrl{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;margin-top:14px}
+.chip{display:inline-block;padding:6px 16px;border-radius:980px;font-size:14px;font-weight:600;margin-bottom:12px;transition:.4s}
+.chip.ok{background:rgba(48,209,88,.18);color:#30d158}
+.chip.ng{background:rgba(255,69,58,.18);color:#ff453a}
+.dots{display:flex;gap:8px;justify-content:center;margin:6px 0 10px}
+.dots i{width:9px;height:9px;border-radius:50%;background:#48484a;transition:.4s}
+.dots i.on{background:var(--blue);transform:scale(1.35)}
+#cap{max-width:640px;text-align:center;color:#d1d1d6;font-size:16px;min-height:76px;margin-top:10px}
+.stage .btn.ghost{color:#64a8ff;border-color:#64a8ff}
+.cmp td:first-child,.cmp th:first-child{white-space:nowrap}
+.tblwrap{overflow-x:auto}
+.tblwrap table{min-width:560px}
+.gtbl td:first-child{font-weight:600;white-space:nowrap}
+ul.pts{margin:10px 0 0 20px;color:var(--sub);font-size:17px}
+ul.pts li{margin:6px 0}
+</style>
+</head>
+<body>
+<nav class="top">
+<a href="index.html">홈</a>
+<a href="proc-1-tsv-formation.html">TSV 형성 (실리콘 관통 전극)</a>
+<a href="proc-2-microbump.html">마이크로범프 형성</a>
+<a href="proc-3-wafer-thinning.html">웨이퍼 씨닝 (백그라인딩과 캐리어 핸들링)</a>
+<a href="proc-4-die-stacking-bonding.html">다이 적층 본딩 (TC-NCF와 MR-MUF 흐름)</a>
+<a href="proc-5-underfill-molding.html" class="on">언더필과 몰딩 (갭 필 및 보호)</a>
+<a href="proc-6-test-interposer-integration.html">테스트와 인터포저 통합 (KGSD와 2.5D 패키징)</a>
+</nav>
+
+<header class="hero">
+<div class="eyebrow">HBM 공정 5 / 6</div>
+<h1>언더필과 몰딩<br><span class="grad">틈을 채우고, 열을 보낸다</span></h1>
+<p class="lead">쌓아 올린 다이 사이의 머리카락보다 훨씬 얇은 틈. 여기를 빈틈없이 채워야 접합부가 살고, 열이 빠져나갑니다.</p>
+</header>
+
+<section class="blk reveal">
+<div class="num">WHY</div>
+<h2>왜 틈을 채워야 할까요</h2>
+<p>적층이 끝난 HBM 스택을 옆에서 보면, 다이와 다이 사이에 마이크로범프만 점점이 서 있고 나머지는 텅 빈 공기층이에요. 이 상태로는 세 가지 문제가 생깁니다. 후배 때 이 그림부터 머릿속에 넣어 두면 면접 질문이 훨씬 쉬워져요.</p>
+<div class="grid">
+<div class="card"><h3>접합부 보호</h3><p>범프는 직경이 수십 마이크로미터 수준(약)이라 작은 응력에도 균열이 가요. 수지가 틈을 채우면 응력이 범프 하나에 몰리지 않고 면 전체로 퍼집니다.</p></div>
+<div class="card"><h3>열 방출 경로</h3><p>공기의 열전도율은 약 0.03 W/mK로 아주 낮아요. 수지로 채우면 아래쪽 베이스 다이의 로직 열이 위로, 위쪽 다이의 열이 옆으로 빠져나갈 길이 생깁니다.</p></div>
+<div class="card"><h3>기계적 안정과 보호</h3><p>얇게 간 다이는 깨지기 쉬워요. 수지와 몰드 컴파운드가 스택을 하나의 덩어리로 묶고, 습기와 이물질로부터 막아 줍니다.</p></div>
+</div>
+</section>
+
+<section class="blk reveal">
+<div class="num">STEPS</div>
+<h2>단계별로 뜯어보기</h2>
+<p>회사와 방식(TC-NCF, MR-MUF)에 따라 순서와 일부 단계는 합쳐지기도 해요. 여기서는 개념을 잡기 좋게 풀어서 설명할게요. 수치는 대략적인 감을 위한 것이라 모두 '약'으로 봐 주세요.</p>
+<ol class="steps">
+<li><div class="num">STEP 1</div><h3>표면 전처리</h3><p>플라즈마 등으로 표면의 유기 오염과 산화막을 정리해요. 수지가 표면을 잘 적시게(젖음성) 해 주는 단계라, 여기가 부실하면 뒤에서 박리와 보이드로 돌아옵니다.</p></li>
+<li><div class="num">STEP 2</div><h3>수지 디스펜스</h3><p>스택 한쪽 가장자리를 따라 니들로 액상 수지(언더필)를 떨어뜨려요. 한쪽에서만 넣는 이유는 반대쪽으로 공기를 밀어내며 채우기 위해서예요. 양쪽에서 넣으면 가운데에 공기가 갇힙니다.</p></li>
+<li><div class="num">STEP 3</div><h3>모세관 충진</h3><p>틈이 좁으면 수지가 표면장력과 젖음 효과로 스스로 빨려 들어가요. 이것이 모세관 현상입니다. 틈이 약 수십 마이크로미터 이하로 좁고 범프가 촘촘할수록 흐름이 느려지고, 수지 점도와 온도가 속도를 좌우해요.</p></li>
+<li><div class="num">STEP 4</div><h3>필렛 형성과 경화</h3><p>다이 가장자리에 수지가 완만하게 올라붙은 모양을 필렛(fillet)이라고 해요. 적당한 필렛은 모서리 응력을 분산시킵니다. 이후 오븐에서 열경화시켜 수지를 단단하게 만들어요.</p></li>
+<li><div class="num">STEP 5</div><h3>일괄 몰딩</h3><p>몰드 컴파운드(EMC)를 스택 전체 위로 덮어 성형하고 경화해요. 틈 안쪽은 이미 채워졌으니, 몰딩은 바깥을 감싸 보호하고 형상을 잡는 역할이에요.</p></li>
+<li><div class="num">STEP 6</div><h3>후경화와 검사</h3><p>충분히 경화시킨 뒤, 초음파(SAM)나 X-ray로 보이드와 박리가 없는지 비파괴 검사를 해요. 불량이 여기서 잡히지 않고 다음 공정으로 넘어가면 손실이 눈덩이처럼 커집니다.</p></li>
+</ol>
+</section>
+
+<section class="blk reveal">
+<div class="num">COMPARE</div>
+<h2>기판형 언더필 vs 일괄 몰딩</h2>
+<p>이 단원에서 제일 많이 헷갈리는 포인트예요. 기판형(모세관) 언더필은 개별 접합부를 정밀하게 채우는 방식이고, 일괄 몰딩은 한 번에 덮는 방식입니다. 실제 HBM 양산 방식은 회사마다 달라서, 아래는 개념 비교로 이해하세요.</p>
+<div class="tblwrap">
+<table class="cmp">
+<tr><th>구분</th><th>모세관 언더필 (CUF)</th><th>일괄 몰딩 (MUF 계열)</th></tr>
+<tr><td>충진 방식</td><td>디스펜스 후 모세관 현상으로 흡입</td><td>몰드 컴파운드를 압력으로 밀어 넣어 틈과 외부를 동시에</td></tr>
+<tr><td>공정 수</td><td>충진, 경화, 이후 몰딩이 따로</td><td>충진과 보호를 한 번에 처리하는 구조</td></tr>
+<tr><td>충진 속도</td><td>틈이 좁을수록 느림</td><td>압력 덕에 빠름</td></tr>
+<tr><td>필러 함량</td><td>흐름 때문에 제한적</td><td>필러를 많이 넣을 수 있어 열전도에 유리</td></tr>
+<tr><td>주요 위험</td><td>보이드, 필렛 불균일, 느린 택타임</td><td>좁은 틈 충진 불량, 와이어 스윕 같은 흐름 이슈</td></tr>
+</table>
+</div>
+<div class="tip"><b>선배 한마디</b> TC-NCF는 본딩할 때 이미 필름(NCF)이 틈을 채워서, 별도 모세관 충진 없이 몰딩만 이어져요. 반면 MR-MUF는 적층 뒤 몰딩 재료로 틈과 외부를 한 번에 채우는 흐름입니다. 앞 단원(공정 4)과 연결해서 정리해 두세요.</div>
+</section>
+
+<section class="blk reveal">
+<div class="num">LIVE</div>
+<h2>직접 흘려 보세요</h2>
+<p>스택 단면에서 수지가 왼쪽 틈으로 들어가 퍼지고, 이어 몰드 컴파운드가 덮이는 과정이에요. 정상 충진과 보이드가 남는 실패 사례를 번갈아 비교해 보세요.</p>
+<div class="stage">
+<span class="chip ok" id="chip">정상 충진</span>
+<svg id="svg" viewBox="0 0 640 340" role="img" aria-label="HBM 적층체 단면에서 언더필 수지가 틈을 채우고 몰드 컴파운드가 덮이는 애니메이션" width="640"></svg>
+<div class="dots" id="dots"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div id="cap">준비됨. 재생을 누르면 수지 디스펜스부터 시작해요.</div>
+<div class="ctrl">
+<button class="btn" id="bPlay">재생</button>
+<button class="btn ghost" id="bNext">다음</button>
+<button class="btn ghost" id="bReset">리셋</button>
+<button class="btn ghost" id="bMode">실패 사례로 전환</button>
+</div>
+</div>
+<p>재생이 끝나면 다음 재생은 자동으로 반대 사례로 바뀌어요. 같은 화면에서 비교하는 게 포인트입니다.</p>
+</section>
+
+<section class="blk reveal">
+<div class="num">ISSUES</div>
+<h2>현장에서 터지는 이슈</h2>
+<div class="grid">
+<div class="card"><h3>보이드 (Void)</h3><p>범프 사이나 흐름 끝에 공기가 갇힌 빈 공간이에요. 열 사이클에서 공기가 팽창해 균열의 시작점이 되고, 열이 몰리는 핫스팟도 만듭니다. 흐름 속도, 점도, 디스펜스 위치로 줄여요.</p></div>
+<div class="card"><h3>필렛 형상</h3><p>너무 작으면 모서리 보호가 부족하고, 너무 크면 옆 칩이나 주변 구조와 간섭하며 면적을 잡아먹어요. 수지 양과 디스펜스 경로를 정밀하게 제어해야 합니다.</p></div>
+<div class="card"><h3>휨 (Warpage)</h3><p>실리콘은 열팽창계수가 약 2.6 ppm/K인데 수지와 EMC는 수십 ppm/K 수준(약)이에요. 경화 후 식는 과정에서 이 차이가 스택을 휘게 하고, 다음 공정의 접합 수율을 떨어뜨립니다.</p></div>
+<div class="card"><h3>박리와 습기</h3><p>수지와 다이 표면 사이 접착이 약하면 경계면이 벌어져요. 거기로 습기가 들어가면 신뢰성 시험에서 불량이 납니다.</p></div>
+</div>
+
+<h3 style="margin-top:50px">열전도와 휨 억제의 trade-off</h3>
+<p>수지에 실리카 같은 필러를 많이 넣으면 열팽창이 줄어 휨에 좋고 열전도도 오릅니다(필러 포함 약 1 W/mK 이상, 순수 에폭시는 약 0.2 W/mK 안팎). 대신 점도가 올라 좁은 틈으로 잘 안 들어가요. 필러를 작게 만들면 틈에는 유리하지만 점도가 또 올라가죠. 결국 이 공정은 흐름, 열, 응력 세 가지 중 어디서 타협할지 고르는 일입니다.</p>
+<div class="tblwrap">
+<table>
+<tr><th>필러를 늘리면</th><th>좋아지는 점</th><th>나빠지는 점</th></tr>
+<tr><td>열전도</td><td>방열 경로가 개선</td><td>없음 (다른 항목에서 대가를 치름)</td></tr>
+<tr><td>열팽창(CTE)</td><td>실리콘과 차이가 줄어 휨 억제</td><td>모듈러스가 올라 단단해짐</td></tr>
+<tr><td>점도·흐름</td><td>없음</td><td>충진 느림, 보이드 위험 증가</td></tr>
+</table>
+</div>
+</section>
+
+<section class="blk reveal">
+<div class="num">INTERVIEW</div>
+<h2>면접 포인트</h2>
+<div class="tip"><b>Q. 언더필이 왜 필요한가요?</b> 범프 접합부의 응력을 분산해 열 사이클 피로를 막고, 틈을 열이 지나갈 경로로 바꾸기 위해서입니다. 핵심은 보호와 방열 두 가지를 같이 말하는 거예요.</div>
+<div class="tip"><b>Q. 보이드는 왜 생기고 어떻게 줄이나요?</b> 모세관 흐름이 범프를 돌아가다 흐름 앞쪽이 합쳐지는 곳에 공기가 갇혀서 생겨요. 한쪽 디스펜스, 점도와 온도 조절, 표면 젖음성 개선, 기판을 약간 데워 흐름을 돕는 방식으로 줄입니다.</div>
+<div class="tip"><b>Q. 필러 함량의 trade-off를 설명해 보세요.</b> 열전도와 휨은 좋아지지만 점도가 올라 좁은 틈 충진이 어려워진다고 답하면 됩니다. 필러 크기와 모양(구형)을 이유로 덧붙이면 가산점이에요.</div>
+<ul class="pts">
+<li>공정 4(적층 본딩)와 연결해 TC-NCF와 MR-MUF의 충진 시점 차이를 설명할 수 있어야 해요.</li>
+<li>검사는 SAM(초음파)과 X-ray로 한다는 것까지 알아 두면 좋습니다.</li>
+<li>회사별 상세 스펙은 비공개가 많으니, 모르면 아는 척하지 말고 원리 중심으로 답하세요.</li>
+</ul>
+</section>
+
+<section class="blk reveal">
+<div class="num">GLOSSARY</div>
+<h2>용어 표</h2>
+<div class="tblwrap">
+<table class="gtbl">
+<tr><th>용어</th><th>뜻</th></tr>
+<tr><td>언더필 (Underfill)</td><td>칩과 칩, 또는 칩과 기판 사이 틈을 채우는 수지</td></tr>
+<tr><td>CUF</td><td>Capillary Underfill. 모세관 현상으로 흡입시키는 언더필</td></tr>
+<tr><td>MUF / MR-MUF</td><td>Molded Underfill. 몰딩 재료로 틈과 외부를 함께 채우는 방식. MR-MUF는 SK하이닉스가 쓰는 방식</td></tr>
+<tr><td>NCF</td><td>Non-Conductive Film. 본딩 때 틈을 채우는 비전도성 필름</td></tr>
+<tr><td>EMC</td><td>Epoxy Molding Compound. 에폭시 몰드 컴파운드</td></tr>
+<tr><td>모세관 현상</td><td>좁은 틈에서 표면장력으로 액체가 빨려 들어가는 현상</td></tr>
+<tr><td>필렛 (Fillet)</td><td>다이 가장자리에 수지가 올라붙은 완만한 형상</td></tr>
+<tr><td>보이드 (Void)</td><td>수지 안에 갇힌 공기 구멍</td></tr>
+<tr><td>CTE</td><td>열팽창계수. 재료 간 차이가 클수록 휨과 응력이 커짐</td></tr>
+<tr><td>필러 (Filler)</td><td>열팽창 감소와 열전도 향상을 위해 넣는 실리카 등의 입자</td></tr>
+<tr><td>SAM</td><td>Scanning Acoustic Microscopy. 초음파로 내부 보이드와 박리를 보는 검사</td></tr>
+</table>
+</div>
+</section>
+
+<div class="pager">
+<a class="btn ghost" href="proc-4-die-stacking-bonding.html">← 이전: 다이 적층 본딩</a>
+<a class="btn" href="proc-6-test-interposer-integration.html">다음: 테스트와 인터포저 통합 →</a>
+</div>
+<footer>HBM 공정 백과 · 수치는 이해를 돕기 위한 대략값(약)이며 회사와 세대에 따라 다릅니다.</footer>
+
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg',svg=document.getElementById('svg');
+var X0=170,W=300;
+var gaps=[{y:288,h:12},{y:256,h:14},{y:224,h:14},{y:192,h:14},{y:160,h:14}];
+var dieY=[270,238,206,174,142];
+var dieName=['베이스 다이','코어 다이 1','코어 다이 2','코어 다이 3','코어 다이 4'];
+var voidsDef=[{g:1,cx:297,rx:12},{g:2,cx:297,rx:12},{g:2,cx:409,rx:9},{g:3,cx:345,rx:11},{g:4,cx:249,rx:9}];
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+var DUR=[1,900,2800,1200,2200,1300];
+var CAP={
+ok:['준비됨. 베이스 다이 위에 코어 다이 4장이 쌓였고, 틈에는 범프만 서 있어요.',
+'디스펜스. 니들이 스택 왼쪽 가장자리에 액상 수지를 떨어뜨립니다.',
+'모세관 충진. 수지가 왼쪽에서 오른쪽으로 범프 사이를 고르게 밀고 가며 공기를 반대쪽으로 내보내요.',
+'필렛 형성과 경화. 양쪽 모서리에 완만한 필렛이 맺히고 수지가 열경화되며 단단해집니다. 보이드 없음.',
+'일괄 몰딩. 몰드 컴파운드가 아래에서 위로 올라오며 스택 전체를 덮어요.',
+'몰드 경화 완료. 틈이 꽉 차 있으니 열이 위로 매끄럽게 빠집니다(초록 화살표).'],
+ng:['준비됨. 같은 스택이지만, 이번엔 충진 조건이 나쁜 경우예요.',
+'디스펜스. 수지량이 부족하거나 점도가 높으면 처음부터 흐름이 불안해요.',
+'모세관 충진. 흐름 앞쪽이 범프를 돌아 합쳐지는 곳에서 공기가 갇혀 빈 공간(빨간 점선)이 생깁니다.',
+'경화. 보이드가 그대로 굳어요. 오른쪽 위쪽은 필렛도 모자랍니다.',
+'몰딩. 몰드는 바깥만 덮을 뿐, 이미 굳은 틈 안의 보이드는 못 채워요.',
+'완료처럼 보여도 불량이에요. 보이드 때문에 열이 막히고(빨간 화살표), 열 사이클에서 균열이 시작될 수 있어요. SAM 검사로 걸러야 합니다.']
+};
+var S={ph:0,f:0,mode:'ok',busy:false,tk:0,flip:false};
+
+function el(tag,attrs,parent){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);(parent||svg).appendChild(e);return e}
+function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
+function ease(p){return p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2}
+function hx(c){return [parseInt(c.substr(1,2),16),parseInt(c.substr(3,2),16),parseInt(c.substr(5,2),16)]}
+function lerp(a,b,t){var A=hx(a),B=hx(b);return 'rgb('+A.map(function(v,i){return Math.round(v+(B[i]-v)*t)}).join(',')+')'}
+
+/* build */
+el('rect',{x:90,y:300,width:460,height:22,rx:4,fill:'#48484a'});
+el('text',{x:320,y:316,'text-anchor':'middle','font-size':12,fill:'#d1d1d6'}).textContent='기판 / 인터포저';
+var mold=el('rect',{x:130,y:300,width:380,height:0,fill:'#5e7a99',opacity:0,rx:6});
+var resin=gaps.map(function(g){return el('rect',{x:X0,y:g.y,width:0,height:g.h,fill:'#ffb340'})});
+var voidEls=voidsDef.map(function(v){var g=gaps[v.g];var ry=Math.min(5,g.h/2-1.5);return el('ellipse',{cx:v.cx,cy:g.y+g.h/2,rx:v.rx,ry:ry,fill:'#0b0b0b',stroke:'#ff453a','stroke-dasharray':'3 2',opacity:0})});
+gaps.forEach(function(g){for(var j=0;j<9;j++)el('rect',{x:185+32*j,y:g.y,width:9,height:g.h,fill:'#c7c7cc',rx:2})});
+dieY.forEach(function(y,i){
+el('rect',{x:X0,y:y,width:W,height:18,fill:i?'#636366':'#3a6ea5',rx:3});
+el('text',{x:X0+W/2,y:y+13,'text-anchor':'middle','font-size':11,fill:'#fff'}).textContent=dieName[i];
+});
+var filL=gaps.map(function(g){return el('path',{d:'M'+X0+','+g.y+' q-14,'+g.h/2+' 0,'+g.h+' z',fill:'#ffb340',opacity:0})});
+var filR=gaps.map(function(g){return el('path',{d:'M'+(X0+W)+','+g.y+' q14,'+g.h/2+' 0,'+g.h+' z',fill:'#ffb340',opacity:0})});
+var nozzle=el('g',{opacity:0});
+el('line',{x1:84,y1:210,x2:152,y2:258,stroke:'#8e8e93','stroke-width':9,'stroke-linecap':'round'},nozzle);
+var drop=el('circle',{cx:160,cy:264,r:0,fill:'#ffb340'},nozzle);
+el('text',{x:60,y:200,'font-size':12,fill:'#d1d1d6'},nozzle).textContent='디스펜스 니들';
+var arrows=el('g',{opacity:0});
+[220,320,420].forEach(function(x,i){
+var a=el('line',{x1:x,y1:292,x2:x,y2:118,'stroke-width':4,'stroke-linecap':'round',stroke:'#30d158'},arrows);a.setAttribute('data-i',i);
+});
+var heatTxt=el('text',{x:320,y:108,'text-anchor':'middle','font-size':13,fill:'#30d158',opacity:0});
+var tag1=el('text',{x:525,y:300,'font-size':12,fill:'#d1d1d6',opacity:0});tag1.textContent='몰드 컴파운드';
+var warn=el('text',{x:320,y:30,'text-anchor':'middle','font-size':14,fill:'#ff453a',opacity:0});
+
+function draw(){
+var ph=S.ph,f=S.f,ng=S.mode==='ng';
+var fis=gaps.map(function(g,i){return ph<2?0:ph===2?clamp(f*1.3-i*0.07,0,1):1});
+var rc=ph===3?lerp('#ffb340','#d9822b',f):ph>3?'#d9822b':'#ffb340';
+resin.forEach(function(r,i){r.setAttribute('width',W*fis[i]);r.setAttribute('fill',rc)});
+voidsDef.forEach(function(v,i){
+var on=ng&&ph>=2&&(X0+W*fis[v.g])>(v.cx+v.rx);
+voidEls[i].setAttribute('opacity',on?1:0);
+});
+filL.forEach(function(p,i){p.setAttribute('fill',rc);p.setAttribute('opacity',fis[i]>0.03?1:0)});
+filR.forEach(function(p,i){p.setAttribute('fill',rc);p.setAttribute('opacity',(fis[i]>=1&&(!ng||i<=1))?1:0)});
+nozzle.setAttribute('opacity',(ph===1||ph===2)?1:ph===3?1-f:0);
+drop.setAttribute('r',ph===1?6*f:ph===2?6:0);
+var mh=ph<4?0:ph===4?176*f:176;
+mold.setAttribute('y',300-mh);mold.setAttribute('height',mh);
+mold.setAttribute('opacity',ph<4?0:ph===4?.55:.55+.45*(ph===5?f:0));
+mold.setAttribute('fill',ph===5?lerp('#5e7a99','#3d5670',f):'#5e7a99');
+tag1.setAttribute('opacity',ph>=4?1:0);
+var showA=ph===5?f:0;
+arrows.setAttribute('opacity',showA);
+Array.prototype.forEach.call(arrows.childNodes,function(a){
+var bad=ng&&a.getAttribute('data-i')==='1';
+a.setAttribute('stroke',bad?'#ff453a':'#30d158');
+a.setAttribute('stroke-dasharray',bad?'6 8':'0');
+});
+heatTxt.textContent=ng?'열 정체 (보이드 구간)':'열 방출 경로 확보';
+heatTxt.setAttribute('fill',ng?'#ff453a':'#30d158');
+heatTxt.setAttribute('opacity',showA);
+warn.textContent='보이드 발생 : 불량';
+warn.setAttribute('opacity',ng&&ph>=3?1:0);
+document.getElementById('cap').textContent=CAP[S.mode][ph];
+Array.prototype.forEach.call(document.getElementById('dots').children,function(d,i){d.className=i===ph?'on':''});
+var chip=document.getElementById('chip');
+chip.textContent=ng?'보이드 발생 (실패 사례)':'정상 충진';chip.className='chip '+(ng?'ng':'ok');
+document.getElementById('bMode').textContent=ng?'정상 사례로 전환':'실패 사례로 전환';
+}
+
+function run(ph){
+return new Promise(function(res){
+var tk=S.tk;S.ph=ph;S.f=0;var d=DUR[ph]*(reduce?0.01:1),t0=null;
+function step(t){
+if(tk!==S.tk){res(false);return}
+if(t0===null)t0=t;
+var p=Math.min(1,(t-t0)/d);S.f=ease(p);draw();
+if(p<1)requestAnimationFrame(step);else res(true);
+}
+requestAnimationFrame(step);
+});
+}
+function reset(){S.tk++;S.busy=false;S.ph=0;S.f=0;draw()}
+async function next(){
+if(S.busy||S.ph>=5)return;
+S.busy=true;var tk=S.tk;
+await run(S.ph+1);
+if(tk===S.tk){S.busy=false;if(S.ph===5)S.flip=true}
+}
+async function play(){
+if(S.busy)return;
+if(S.ph>=5){if(S.flip){S.mode=S.mode==='ok'?'ng':'ok';S.flip=false}reset()}
+var tk=S.tk;
+while(S.ph<5&&tk===S.tk){await next()}
+}
+document.getElementById('bPlay').onclick=play;
+document.getElementById('bNext').onclick=function(){
+if(S.ph>=5){return}
+next();
+};
+document.getElementById('bReset').onclick=reset;
+document.getElementById('bMode').onclick=function(){S.mode=S.mode==='ok'?'ng':'ok';S.flip=false;reset()};
+draw();
+})();
+</script>
+<script src="base.js"></script>
+</body>
+</html>

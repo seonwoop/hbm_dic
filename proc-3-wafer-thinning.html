@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>웨이퍼 씨닝 (백그라인딩과 캐리어 핸들링) | HBM 공정 백과</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.rd{display:flex;gap:28px;flex-wrap:wrap;justify-content:center;align-items:baseline;margin-bottom:6px}
+.rd .big{font-size:clamp(34px,6vw,56px);font-weight:700;letter-spacing:-.02em}
+.rd .lab{font-size:13px;color:#a1a1a6}
+.cap{min-height:64px;max-width:720px;text-align:center;color:#f5f5f7;font-size:16px;margin:8px auto 0}
+.cap b{color:#64d2ff}
+.dots{display:flex;gap:8px;justify-content:center;margin:10px 0 4px}
+.dots i{width:28px;height:4px;border-radius:2px;background:#3a3a3c;transition:.4s}
+.dots i.on{background:#0a84ff}
+.ctl{text-align:center;margin-top:8px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;font-size:12px;color:#a1a1a6;margin-top:8px}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;background:var(--c)}
+.step-list{counter-reset:s}
+.card .num{display:block;margin-bottom:6px}
+.note{font-size:14px;color:var(--sub);margin-top:14px}
+</style>
+</head>
+<body>
+<nav class="top">
+<a href="index.html">홈</a>
+<a href="proc-1-tsv-formation.html">TSV 형성 (실리콘 관통 전극)</a>
+<a href="proc-2-microbump.html">마이크로범프 형성</a>
+<a href="proc-3-wafer-thinning.html" class="on">웨이퍼 씨닝 (백그라인딩과 캐리어 핸들링)</a>
+<a href="proc-4-die-stacking-bonding.html">다이 적층 본딩 (TC-NCF와 MR-MUF 흐름)</a>
+<a href="proc-6-test-interposer-integration.html">테스트와 인터포저 통합 (KGSD와 2.5D 패키징)</a>
+</nav>
+
+<header class="hero">
+<div class="eyebrow">HBM 공정 3 / 6</div>
+<h1>웨이퍼 씨닝<br><span class="grad">머리카락보다 얇게.</span></h1>
+<p class="lead">TSV 끝을 밖으로 꺼내려면 웨이퍼를 수십 마이크로미터까지 갈아내야 합니다. 얇아진 웨이퍼를 깨뜨리지 않고 다루는 법, 그게 이 공정의 전부입니다.</p>
+</header>
+
+<section class="blk reveal">
+<div class="eyebrow">왜 필요한가</div>
+<h2>구멍은 뚫었는데, <span class="grad">반대편이 막혀 있다.</span></h2>
+<p>앞 공정에서 TSV는 웨이퍼 앞면(소자면)에서 아래로 파고 들어가 구리로 채웠습니다. 그런데 TSV 깊이는 약 50마이크로미터 안팎이고, 300mm 웨이퍼의 원래 두께는 약 775마이크로미터입니다. 구리 기둥의 아랫면은 실리콘 속에 묻혀 있는 셈이죠. 위아래 칩이 전기적으로 이어지려면 이 아랫면이 드러나야 합니다.</p>
+<div class="grid">
+<div class="card"><span class="num">이유 1</span><h3>TSV 하단 노출</h3><p>뒷면을 갈아 구리 기둥 끝을 밖으로 꺼냅니다. 이게 위층 칩 범프와 만나는 접점이 됩니다.</p></div>
+<div class="card"><span class="num">이유 2</span><h3>적층 높이 확보</h3><p>HBM은 다이를 8단, 12단, 그 이상 쌓습니다. 다이당 약 30~50마이크로미터 수준으로 얇아야 정해진 패키지 높이에 들어갑니다.</p></div>
+<div class="card"><span class="num">이유 3</span><h3>방열과 신호 거리</h3><p>얇을수록 TSV가 짧아져 저항과 신호 지연이 줄고, 열이 빠져나가는 길도 짧아집니다.</p></div>
+</div>
+<div class="tip"><b>선배 한마디</b> 얇게 가는 건 어렵지 않아요. 진짜 난제는 &quot;갈고 난 뒤 이 종잇장 같은 웨이퍼를 어떻게 안 깨고 옮기느냐&quot;입니다. 그래서 캐리어가 나옵니다.</div>
+</section>
+
+<section class="blk reveal">
+<div class="eyebrow">단계별 상세</div>
+<h2>여섯 걸음으로 <span class="grad">얇게, 평평하게.</span></h2>
+<div class="grid step-list">
+<div class="card"><span class="num">STEP 1</span><h3>캐리어 임시 접합</h3><p>소자면을 유리 캐리어에 접착제(임시 접합층)로 붙입니다. 얇아진 웨이퍼가 휘거나 깨지지 않도록 받쳐 주는 버팀대입니다. 유리는 열팽창이 실리콘과 비슷하게 맞춰진 것을 쓰고, 레이저 디본딩이 가능하도록 투명해야 합니다.</p></div>
+<div class="card"><span class="num">STEP 2</span><h3>거친 그라인딩</h3><p>입자가 큰 휠로 두께의 대부분(수백 마이크로미터)을 빠르게 갈아냅니다. 휠이 회전하고 웨이퍼도 회전하면서 한 면을 깎습니다. 처리량은 높지만 표면에 손상층이 남습니다.</p></div>
+<div class="card"><span class="num">STEP 3</span><h3>고운 그라인딩</h3><p>더 고운 휠로 목표 두께 직전(약 50~60마이크로미터)까지 갈고, 손상층을 줄입니다. 이 단계에서 구리 기둥 끝이 실리콘 바로 아래까지 다가옵니다.</p></div>
+<div class="card"><span class="num">STEP 4</span><h3>실리콘 리세스</h3><p>식각이나 폴리싱으로 실리콘만 살짝(수 마이크로미터) 더 걷어내, TSV 구리 끝이 실리콘 면보다 돌출되게 만듭니다. 구리는 거의 안 건드리고 실리콘만 선택적으로 깎는 게 포인트입니다.</p></div>
+<div class="card"><span class="num">STEP 5</span><h3>패시베이션과 CMP</h3><p>뒷면에 절연막을 입히고 CMP(화학기계연마)로 평탄화합니다. 절연막과 구리 단면이 같은 높이로 맞물려야 이후 범프 형성과 접합이 균일해집니다.</p></div>
+<div class="card"><span class="num">STEP 6</span><h3>디본딩과 세정</h3><p>레이저나 열, 기계적 방법으로 캐리어를 떼어내고 접착 잔여물을 세정합니다. 이때 웨이퍼는 이미 매우 얇으므로 테이프 프레임 위로 옮겨 안전하게 받습니다.</p></div>
+</div>
+<p class="note">공정 조건과 두께 값은 제조사와 세대마다 다르며, 여기 적은 수치는 이해를 돕기 위한 대략치(약)입니다.</p>
+</section>
+
+<section class="blk reveal">
+<div class="eyebrow">직접 보기</div>
+<h2>갈리는 걸 <span class="grad">눈으로 확인하세요.</span></h2>
+<p>재생을 누르면 캐리어 접합부터 디본딩까지 순서대로 진행됩니다. 오른쪽 게이지에서 두께가 줄어드는 것을 보세요. 그림 속 웨이퍼 높이는 실제 두께에 비례하지 않는 모식도이며(775 µm와 50 µm를 같은 비율로 그리면 얇은 쪽이 보이지 않습니다), 정확한 두께는 위의 숫자 표시를 기준으로 보세요.</p>
+
+<div class="stage" id="stage">
+<div class="rd">
+<div><div class="lab">현재 단계</div><div class="big" id="stepNo">0 / 6</div></div>
+<div><div class="lab">웨이퍼 두께</div><div class="big" id="thick">약 775 µm</div></div>
+</div>
+<svg id="svg" viewBox="0 0 720 340" role="img" aria-label="캐리어에 접합된 웨이퍼가 그라인딩 휠로 얇아지는 단면 애니메이션">
+<defs>
+<linearGradient id="gg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#64d2ff"/><stop offset="1" stop-color="#0a84ff"/></linearGradient>
+</defs>
+<!-- carrier group -->
+<g id="carrier">
+<rect x="150" y="66" width="420" height="34" rx="4" fill="#64d2ff" fill-opacity=".28" stroke="#64d2ff" stroke-opacity=".8"/>
+<text x="360" y="88" text-anchor="middle" font-size="13" fill="#bfeaff">캐리어 글래스</text>
+<rect x="150" y="100" width="420" height="10" fill="#ff9f0a" fill-opacity=".85"/>
+</g>
+<!-- wafer -->
+<rect id="si" x="150" y="110" width="420" height="150" fill="#8e8e93" fill-opacity=".55" stroke="#aeaeb2" stroke-opacity=".6"/>
+<rect id="pass" x="150" y="260" width="420" height="0" fill="#bf5af2" fill-opacity=".55"/>
+<rect id="beol" x="150" y="110" width="420" height="7" fill="#5e5ce6"/>
+<g id="tsvs" fill="#ff9f0a" stroke="#ffd60a" stroke-width="1.5">
+<rect x="193" y="110" width="14" height="44" rx="2"/>
+<rect x="273" y="110" width="14" height="44" rx="2"/>
+<rect x="353" y="110" width="14" height="44" rx="2"/>
+<rect x="433" y="110" width="14" height="44" rx="2"/>
+<rect x="513" y="110" width="14" height="44" rx="2"/>
+</g>
+<text id="siLab" x="360" y="200" text-anchor="middle" font-size="14" fill="#f5f5f7">Si 웨이퍼</text>
+<!-- wheel -->
+<g id="wheel" opacity="0">
+<rect x="350" y="26" width="20" height="24" fill="#636366"/>
+<rect x="150" y="2" width="420" height="24" rx="5" fill="#8e8e93" id="wDisc"/>
+<g id="teeth" fill="#d1d1d6"></g>
+<line id="wDash" x1="160" y1="14" x2="560" y2="14" stroke="#1c1c1e" stroke-width="3" stroke-dasharray="14 12"/>
+<text id="wLab" x="590" y="20" font-size="12" fill="#d1d1d6">그라인딩 휠</text>
+</g>
+<!-- gauge -->
+<g>
+<rect x="640" y="110" width="20" height="150" rx="3" fill="none" stroke="#636366"/>
+<rect id="gFill" x="640" y="110" width="20" height="150" rx="3" fill="url(#gg)"/>
+<line x1="632" y1="154" x2="668" y2="154" stroke="#ff375f" stroke-dasharray="3 3"/>
+<text x="666" y="178" font-size="11" fill="#ff6482" text-anchor="middle">목표</text>
+<text x="650" y="104" font-size="11" fill="#a1a1a6" text-anchor="middle">두께</text>
+</g>
+</svg>
+<div class="legend">
+<span style="--c:#8e8e93">실리콘</span><span style="--c:#ff9f0a">TSV 구리</span><span style="--c:#5e5ce6">소자층</span><span style="--c:#64d2ff">캐리어 글래스</span><span style="--c:#bf5af2">절연 패시베이션</span>
+</div>
+<div class="dots" id="dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div class="cap" id="cap" aria-live="polite"></div>
+<div class="ctl">
+<button class="btn" id="bPlay" type="button">재생</button>
+<button class="btn ghost" id="bNext" type="button">다음</button>
+<button class="btn ghost" id="bReset" type="button">리셋</button>
+</div>
+</div>
+</section>
+
+<section class="blk reveal">
+<div class="eyebrow">이슈</div>
+<h2>얇아질수록 <span class="grad">까다로워집니다.</span></h2>
+<div class="grid">
+<div class="card"><h3>휨(Warpage)과 파손</h3><p>약 50마이크로미터 두께면 웨이퍼는 거의 종이처럼 유연합니다. 박막 응력만으로도 휘고, 가장자리 미세 균열이 한 번에 깨짐으로 번집니다. 그래서 그라인딩 전에 엣지 트리밍으로 날카로운 가장자리를 다듬기도 합니다.</p></div>
+<div class="card"><h3>두께 균일도(TTV)</h3><p>웨이퍼 전체에서 두께 편차가 크면 TSV 노출 높이가 제각각이 됩니다. 접합층과 접착제 두께까지 균일해야 하므로 몇 마이크로미터 이내 관리가 필요합니다(약).</p></div>
+<div class="card"><h3>구리 오염과 번짐</h3><p>그라인딩 중 노출된 구리가 실리콘 표면으로 번지면 트랜지스터 특성을 해칠 수 있습니다. 구리를 막는 배리어층과, 노출 직전 단계에서의 조심스러운 연마가 중요합니다.</p></div>
+<div class="card"><h3>접착제의 온도 한계</h3><p>임시 접합제는 열에 약합니다. 그래서 뒷면 절연막 증착 같은 후속 공정은 저온에서 해야 하고, 접합제는 공정 온도를 견디면서도 마지막엔 깨끗이 떨어져야 합니다.</p></div>
+<div class="card"><h3>디본딩 손상</h3><p>레이저로 떼든 기계적으로 벗기든, 얇은 웨이퍼에 힘이 한쪽으로 쏠리면 깨집니다. 떼어낸 직후 바로 테이프 프레임에 받쳐 주는 흐름이 사실상 표준입니다.</p></div>
+<div class="card"><h3>손상층 제거</h3><p>그라인딩이 남긴 표면 손상층은 웨이퍼 강도를 떨어뜨립니다. 폴리싱이나 식각으로 걷어내 다이 강도(굽힘 강도)를 확보해야 합니다.</p></div>
+</div>
+</section>
+
+<section class="blk reveal">
+<div class="eyebrow">면접 포인트</div>
+<h2>이렇게 답하면 <span class="grad">깊이가 보입니다.</span></h2>
+<div class="tip"><b>Q. 왜 웨이퍼를 캐리어에 붙인 채로 가나요?</b><br>얇은 웨이퍼는 스스로 형태를 지탱하지 못해 휘고 깨지기 쉽습니다. 임시 접합된 유리 캐리어가 기계적 지지대 역할을 하고, 마지막에 디본딩으로 떼어내기 때문에 접합과 디본딩을 한 쌍의 공정으로 설계해야 한다고 답하면 좋습니다.</div>
+<div class="tip"><b>Q. 그라인딩만으로 TSV를 바로 노출하지 않는 이유는?</b><br>구리 단면이 깎여 나가며 실리콘으로 번질 위험이 있고, 단면 높이 편차도 커집니다. 그래서 고운 그라인딩 후 실리콘 리세스로 구리를 살짝 돌출시키고, 절연막과 CMP로 평탄화하는 순서를 밟는다고 설명하세요.</div>
+<div class="tip"><b>Q. 두께 균일도가 왜 중요한가요?</b><br>TSV 노출 높이와 이후 범프 높이 균일도로 직결되고, 적층 본딩 때 접촉 불량이나 기울어짐으로 이어집니다. 수율과 직결된다는 한 줄을 붙이면 완성입니다.</div>
+<div class="tip"><b>Q. 얇게 만드는 것과 휨은 어떤 관계인가요?</b><br>얇을수록 강성이 급감하므로 막 응력과 열팽창 차이가 그대로 휨으로 드러납니다. 캐리어의 열팽창 계수를 실리콘에 맞추고 공정 온도를 낮추는 이유를 연결해 말해 보세요.</div>
+</section>
+
+<section class="blk reveal">
+<div class="eyebrow">용어 정리</div>
+<h2>이 단어들만 <span class="grad">알아도 반은 갑니다.</span></h2>
+<table>
+<thead><tr><th>용어</th><th>뜻</th></tr></thead>
+<tbody>
+<tr><td>백그라인딩 (Backgrinding)</td><td>웨이퍼 뒷면(소자가 없는 면)을 갈아 두께를 줄이는 공정</td></tr>
+<tr><td>캐리어 (Carrier)</td><td>얇은 웨이퍼를 임시로 붙여 지지하는 유리 또는 실리콘 기판</td></tr>
+<tr><td>임시 접합 / 디본딩</td><td>공정 동안만 붙이는 접합과, 끝난 뒤 레이저나 열, 기계적 방법으로 떼어내는 일</td></tr>
+<tr><td>TTV</td><td>Total Thickness Variation, 웨이퍼 전체의 두께 편차</td></tr>
+<tr><td>CMP</td><td>화학기계연마. 화학 작용과 기계적 연마로 표면을 평탄하게 만드는 공정</td></tr>
+<tr><td>리세스 (Recess)</td><td>실리콘만 선택적으로 얕게 걷어내 TSV 구리를 돌출시키는 처리</td></tr>
+<tr><td>패시베이션</td><td>노출된 뒷면을 절연막으로 덮어 보호하고 구리와 실리콘을 분리하는 층</td></tr>
+<tr><td>엣지 트리밍</td><td>그라인딩 전 웨이퍼 가장자리를 다듬어 칼날 모양 가장자리의 깨짐을 막는 처리</td></tr>
+</tbody>
+</table>
+</section>
+
+<div class="pager">
+<a class="btn ghost" href="proc-2-microbump.html">&larr; 마이크로범프 형성</a>
+<a class="btn" href="proc-4-die-stacking-bonding.html">다이 적층 본딩 &rarr;</a>
+</div>
+<footer>HBM 공정 백과 &middot; 수치는 이해를 위한 대략치(약)이며 제조사와 세대별로 다릅니다.</footer>
+
+<script src="base.js"></script>
+<script>
+(function(){
+var Y0=110,NS='http://www.w3.org/2000/svg';
+var $=function(id){return document.getElementById(id)};
+var S=[
+{wh:150,p:0,cdy:-60,cop:0,wop:0,tsvOp:.4,th:775,wl:'',cap:'<b>출발.</b> TSV를 채운 두꺼운 웨이퍼(약 775 µm)입니다. 구리 기둥은 아직 실리콘 속에 완전히 묻혀 있습니다.'},
+{wh:150,p:0,cdy:0,cop:1,wop:0,tsvOp:.4,th:775,wl:'',cap:'<b>1. 캐리어 접합.</b> 소자면을 접착층으로 유리 캐리어에 임시 접합합니다. 이제 뒷면을 갈아도 받쳐 주는 지지대가 생겼습니다.'},
+{wh:70,p:0,cdy:0,cop:1,wop:1,tsvOp:.4,th:100,wl:'거친 휠',cap:'<b>2. 거친 그라인딩.</b> 입자가 큰 휠이 회전하며 두께 대부분을 빠르게 깎습니다. 두께가 약 100 µm 수준까지 줄어듭니다.'},
+{wh:50,p:0,cdy:0,cop:1,wop:1,tsvOp:.65,th:55,wl:'고운 휠',cap:'<b>3. 고운 그라인딩.</b> 고운 휠로 약 50~60 µm까지 접근하며 표면 손상층을 줄입니다. 구리 끝이 실리콘 바로 위에 비칩니다.'},
+{wh:38,p:0,cdy:0,cop:1,wop:0,tsvOp:1,th:50,wl:'',cap:'<b>4. 실리콘 리세스.</b> 휠은 물러나고, 식각으로 실리콘만 살짝 더 걷어내 TSV 구리 끝이 서서히 돌출되어 드러납니다.'},
+{wh:38,p:6,cdy:0,cop:1,wop:1,tsvOp:1,th:50,wl:'CMP 패드',cap:'<b>5. 패시베이션과 CMP.</b> 절연막을 입히고 CMP로 갈아 구리 단면과 절연막을 같은 높이로 평탄화합니다.'},
+{wh:38,p:6,cdy:-60,cop:0,wop:0,tsvOp:1,th:50,wl:'',cap:'<b>6. 디본딩.</b> 캐리어를 떼어내고 접착 잔여물을 세정합니다. 얇은 웨이퍼(약 50 µm)는 이어서 테이프 프레임에 받쳐 다음 공정으로 갑니다.'}
+];
+var st=Object.assign({},S[0]),idx=0,playing=false,timer=null,raf=null;
+var keys=['wh','p','cdy','cop','wop','tsvOp','th'];
+
+// wheel teeth
+var teeth=$('teeth');
+for(var i=0;i<28;i++){var r=document.createElementNS(NS,'rect');r.setAttribute('x',156+i*14.9);r.setAttribute('y',-3);r.setAttribute('width',9);r.setAttribute('height',5);teeth.appendChild(r)}
+
+function render(){
+ var b=st.wh+st.p;
+ $('si').setAttribute('height',st.wh);
+ $('pass').setAttribute('y',Y0+st.wh);$('pass').setAttribute('height',st.p);
+ $('siLab').setAttribute('y',Y0+st.wh/2+5);
+ $('siLab').setAttribute('opacity',st.wh>60?1:0);
+ $('tsvs').setAttribute('opacity',st.tsvOp);
+ $('carrier').setAttribute('transform','translate(0,'+st.cdy+')');
+ $('carrier').setAttribute('opacity',Math.max(0,st.cop));
+ $('wheel').setAttribute('transform','translate(0,'+(Y0+b)+')');
+ $('wheel').setAttribute('opacity',Math.max(0,st.wop));
+ $('gFill').setAttribute('height',b);
+ $('thick').textContent='약 '+Math.round(st.th)+' µm';
+}
+function labelState(){
+ var cmp=idx===5;
+ $('wLab').textContent=S[idx].wl||'그라인딩 휠';
+ $('wDisc').setAttribute('fill',cmp?'#30b0c7':'#8e8e93');
+ $('teeth').setAttribute('opacity',cmp?0:1);
+ $('stepNo').textContent=idx+' / 6';
+ $('cap').innerHTML=S[idx].cap;
+ var d=$('dots').children;for(var i=0;i<d.length;i++)d[i].className=i<=idx?'on':'';
+ $('bNext').disabled=idx>=6;$('bNext').style.opacity=idx>=6?.4:1;
+ $('bPlay').textContent=playing?'일시정지':(idx>=6?'다시 재생':'재생');
+}
+function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2}
+function tween(target,dur){
+ if(raf)cancelAnimationFrame(raf);
+ var from={};keys.forEach(function(k){from[k]=st[k]});
+ var t0=null;
+ function f(ts){
+  if(t0===null)t0=ts;
+  var t=Math.min(1,(ts-t0)/dur),e=ease(t);
+  keys.forEach(function(k){st[k]=from[k]+(target[k]-from[k])*e});
+  render();
+  if(t<1)raf=requestAnimationFrame(f);else raf=null;
+ }
+ raf=requestAnimationFrame(f);
+}
+function go(i){idx=i;labelState();tween(S[i],1400)}
+function stop(){playing=false;clearTimeout(timer);labelState()}
+function loop(){
+ if(!playing)return;
+ if(idx<6){go(idx+1);timer=setTimeout(loop,2800)}else{stop()}
+}
+$('bPlay').onclick=function(){
+ if(playing){stop();return}
+ if(idx>=6){idx=0;Object.assign(st,S[0]);render()}
+ playing=true;labelState();
+ if(idx===0){go(1);timer=setTimeout(loop,2800)}else{loop()}
+};
+$('bNext').onclick=function(){stop();if(idx<6)go(idx+1)};
+$('bReset').onclick=function(){stop();idx=0;labelState();tween(S[0],700)};
+
+// wheel rotation
+var off=0;
+(function spin(){
+ if(st.wop>.05){off-=3;$('wDash').setAttribute('stroke-dashoffset',off)}
+ requestAnimationFrame(spin);
+})();
+
+render();labelState();
+})();
+</script>
+</body>
+</html>
