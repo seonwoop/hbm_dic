@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>COW TEST | HBM 공정 6/8</title>
+<meta name="description" content="HBM 공정 6단계 COW TEST(Chip on Wafer Test). ASSY에서 버퍼 다이 웨이퍼 위에 코어 다이 스택이 합쳐져 만들어진 COW(Chip on Wafer) 상태에서, 접합과 전기적 연결, 기본 동작을 웨이퍼 단위로 확인하는 단계를 설명합니다.">
+<link rel="stylesheet" href="style.css">
+<style>
+.warn{border-left-color:#ff9f0a;background:color-mix(in srgb,#ff9f0a 12%,var(--card))}
+.warn b{color:#ff9f0a}
+.steps{counter-reset:s;list-style:none;padding:0;margin-top:26px;display:grid;gap:14px}
+.steps li{counter-increment:s;background:var(--card);border-radius:20px;padding:20px 22px 20px 70px;position:relative;box-shadow:0 2px 20px rgba(0,0,0,.06)}
+.steps li::before{content:counter(s);position:absolute;left:20px;top:18px;width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center}
+.steps li b{display:block;font-size:18px;margin-bottom:2px}
+.steps li span{color:var(--sub);font-size:16px}
+.cap{min-height:56px;max-width:640px;text-align:center;font-size:17px;margin-top:10px;color:#f5f5f7}
+.ctrl{display:flex;flex-wrap:wrap;justify-content:center;margin-top:6px}
+.prog{color:#a1a1a6;font-size:13px;margin-top:4px}
+.stage svg text{font-family:inherit}
+#probe{transition:transform .55s var(--ease)}
+.dieset{transition:opacity .6s var(--ease)}
+.mark{transition:opacity .4s}
+</style>
+</head>
+<body>
+<nav class="top">
+<a href="index.html">홈</a>
+<a href="proc-1-fab.html">FAB</a>
+<a href="proc-2-eds.html">EDS</a>
+<a href="proc-3-pfab.html">PFAB</a>
+<a href="proc-4-assy.html">ASSY</a>
+<a href="proc-5-dbd.html">DBD</a>
+<a href="proc-6-cow-test.html" class="on">COW TEST</a>
+<a href="proc-7-ass2-mpga-saw.html">ASS2 (MPGA SAW)</a>
+<a href="proc-8-test.html">TEST</a>
+</nav>
+
+<header class="hero">
+<div class="eyebrow">6 / 8단계</div>
+<h1><span class="grad">COW TEST</span></h1>
+<p class="lead">이미 합쳐진 COW 웨이퍼 위에서, 스택이 잘 붙고 제대로 동작하는지 절단 전에 먼저 확인합니다.</p>
+</header>
+
+<section class="blk reveal">
+<h2>이 단계란?</h2>
+<p><b>COW TEST</b>는 <b>Chip on Wafer Test</b>의 줄임말로, 합쳐진 COW 상태에서 하는 웨이퍼 단위 테스트입니다. HBM 후공정의 앞 단계인 4단계 ASSY에서 코어 다이를 쌓고, 이를 버퍼 다이(베이스 다이) 웨이퍼 위에 합쳐 COW를 만듭니다. 5단계 DBD에서 캐리어를 분리한 뒤, 이 6단계에서는 그렇게 만들어진 COW를 그대로 테스트합니다. COW를 개별 스택으로 자르는 일은 이 단계 다음인 7단계 ASS2 (MPGA SAW)에서 이루어집니다.</p>
+<p style="margin-top:14px">이 단계에서는 웨이퍼 단위로 접합이 제대로 되었는지, 전기 신호가 위아래로 통하는지, 기본 동작을 하는지를 살펴봅니다. 불량은 일찍 걸러낼수록 좋습니다. 절단 전에 위치별 양품과 불량을 알아 두면, 불량 스택에 뒤따르는 공정 비용이 쌓이는 것을 줄일 수 있습니다.</p>
+<div class="tip warn"><b>주의</b> 공정 단계의 범위와 이름은 회사마다 다를 수 있습니다. 이 사이트는 ASSY를 코어 다이를 쌓아 버퍼 다이 웨이퍼 위에 합쳐 COW를 만드는 단계로, COW TEST를 합쳐진 COW를 테스트하는 단계로, ASS2 (MPGA SAW)를 COW를 마지막에 잘라 스택으로 분리하는 소잉 단계로 정의합니다. 구체적인 검사 항목과 방식은 제품과 회사에 따라 달라질 수 있습니다.</div>
+</section>
+
+<section class="blk reveal">
+<h2>단계별 상세</h2>
+<p>COW TEST를 일반적으로 해석하면 다음과 같은 흐름으로 이해할 수 있습니다.</p>
+<ol class="steps">
+<li><b>웨이퍼 준비</b><span>코어 다이 스택이 합쳐진 COW 웨이퍼를 테스트 장비의 척(받침대)에 고정합니다. 위치를 정밀하게 맞춰야 프로브가 각 다이의 접점에 정확히 닿습니다.</span></li>
+<li><b>프로브 접촉</b><span>가느다란 탐침(프로브)이 달린 프로브 카드를 내려 다이의 접점에 닿게 합니다. 접촉이 고르지 않으면 측정값이 흔들릴 수 있습니다.</span></li>
+<li><b>신호 인가와 측정</b><span>테스트 장비가 전기 신호를 보내고, 되돌아오는 신호를 읽습니다. 적층된 다이 사이의 연결이 끊기거나 저항이 비정상적이면 이 단계에서 드러납니다.</span></li>
+<li><b>기본 동작 확인</b><span>메모리가 기본적인 쓰기와 읽기를 하는지 살펴봅니다. 세부 항목은 제품과 공정에 따라 다를 수 있습니다.</span></li>
+<li><b>양품과 불량 판정</b><span>결과에 따라 각 위치를 양품 또는 불량으로 기록합니다. 이 기록은 이후 7단계 절단과 최종 테스트 단계에서 참고할 수 있는 정보가 됩니다.</span></li>
+</ol>
+</section>
+
+<section class="blk reveal">
+<h2>눈으로 보는 COW TEST</h2>
+<p>아래 단면 그림에서 프로브가 COW 위를 오가며 접촉하고 신호를 흘려 보냅니다. 재생을 누르거나, 다음 버튼으로 한 단계씩 확인해 보세요.</p>
+<div class="stage">
+<svg id="sv" viewBox="0 0 640 290" role="img" aria-label="버퍼 다이 웨이퍼 위에 코어 다이 스택이 합쳐진 COW에 프로브가 접촉해 신호를 흘리고 양품과 불량을 판정하는 단면 애니메이션">
+<rect x="30" y="8" width="580" height="54" rx="10" fill="#1c1c1e" stroke="#38383a"/>
+<text x="42" y="24" fill="#a1a1a6" font-size="11">테스트 장비 신호</text>
+<path id="wave" d="M40 42 H600" fill="none" stroke="#30d158" stroke-width="2.5" stroke-linejoin="round" style="opacity:0"/>
+<g id="probe" style="transform:translate(82px,0px)">
+<line x1="0" y1="62" x2="0" y2="70" stroke="#a1a1a6" stroke-width="2"/>
+<rect x="-36" y="70" width="72" height="12" rx="3" fill="#8e8e93"/>
+<line x1="-24" y1="82" x2="-24" y2="100" stroke="#ffd60a" stroke-width="2.5"/>
+<line x1="-8" y1="82" x2="-8" y2="100" stroke="#ffd60a" stroke-width="2.5"/>
+<line x1="8" y1="82" x2="8" y2="100" stroke="#ffd60a" stroke-width="2.5"/>
+<line x1="24" y1="82" x2="24" y2="100" stroke="#ffd60a" stroke-width="2.5"/>
+</g>
+<rect x="30" y="230" width="580" height="22" rx="6" fill="#3a3a3c"/>
+<text x="320" y="246" fill="#a1a1a6" font-size="11" text-anchor="middle">버퍼 다이 웨이퍼</text>
+<g id="dies"></g>
+<g id="marks"></g>
+<text x="320" y="278" fill="#a1a1a6" font-size="11" text-anchor="middle">아래 큰 막대: 버퍼 다이, 그 위 얇은 막대: 코어 다이 스택 (합쳐진 COW)</text>
+</svg>
+<div class="cap" id="cap" aria-live="polite">준비 상태입니다. 버퍼 다이 웨이퍼 위에 코어 다이 스택이 합쳐진 COW입니다.</div>
+<div class="prog" id="prog">0 / 7</div>
+<div class="ctrl">
+<button class="btn" id="bPlay" type="button">재생</button>
+<button class="btn ghost" id="bNext" type="button">다음</button>
+<button class="btn ghost" id="bReset" type="button">리셋</button>
+</div>
+</div>
+</section>
+
+<section class="blk reveal">
+<h2>주요 이슈</h2>
+<div class="grid">
+<div class="card"><h3>접촉 안정성</h3><p>프로브가 닿는 힘과 위치가 고르지 않으면 정상 칩도 불량처럼 보일 수 있습니다. 접점이 작을수록 더 까다롭습니다.</p></div>
+<div class="card"><h3>적층 구조의 한계</h3><p>다이가 여러 층 쌓여 있어 아래쪽 다이의 상태를 밖에서 직접 보기 어렵습니다. 연결을 간접적으로 확인해야 하는 부분이 있습니다.</p></div>
+<div class="card"><h3>손상 최소화</h3><p>접촉 자체가 얇은 다이에 스트레스를 줄 수 있어, 접촉 횟수와 힘을 조심스럽게 다룹니다.</p></div>
+<div class="card"><h3>발열과 시간</h3><p>테스트 중 열이 생기고 검사 시간이 길어지면 생산 속도에 영향을 줄 수 있습니다. 어디까지 검사할지는 비용과 효과의 균형으로 정해집니다.</p></div>
+</div>
+<div class="tip"><b>핵심 포인트</b> COW TEST는 &ldquo;COW를 자르기 전에 한 번 걸러 두는&rdquo; 단계입니다. 불량 스택이 뒤 공정까지 따라가지 않게 해서, 공정 전체의 낭비를 줄이는 데 의미가 있습니다.</div>
+</section>
+
+<section class="blk reveal">
+<h2>용어 표</h2>
+<table>
+<thead><tr><th>용어</th><th>뜻</th></tr></thead>
+<tbody>
+<tr><td>COW</td><td>Chip on Wafer. 버퍼 다이 웨이퍼 위에 코어 다이 스택이 합쳐진 상태. 4단계 ASSY에서 만들어지고, 7단계에서 마지막에 절단됨</td></tr>
+<tr><td>COW TEST</td><td>이미 합쳐진 COW 상태에서 웨이퍼 단위로 하는 테스트. 절단(7단계) 전에 수행</td></tr>
+<tr><td>버퍼 다이</td><td>베이스 다이라고도 부르며, 아래쪽에서 코어 다이를 받쳐 주고 외부와 신호를 주고받는 칩</td></tr>
+<tr><td>코어 다이</td><td>데이터를 저장하는 DRAM 칩. HBM에서는 여러 장을 쌓음</td></tr>
+<tr><td>프로브 카드</td><td>탐침이 달려 칩의 접점에 닿는 테스트용 부품</td></tr>
+<tr><td>ASS2 (MPGA SAW)</td><td>COW를 마지막에 잘라 개별 스택으로 분리하는 소잉 단계. &lsquo;MPGA&rsquo; 약어 풀이는 확인되지 않음</td></tr>
+<tr><td>양품 / 불량</td><td>검사를 통과한 칩 / 통과하지 못한 칩</td></tr>
+</tbody>
+</table>
+</section>
+
+<div class="pager">
+<a class="btn ghost" href="proc-5-dbd.html">&larr; 5 DBD</a>
+<a class="btn" href="proc-7-ass2-mpga-saw.html">7 ASS2 (MPGA SAW) &rarr;</a>
+</div>
+<footer>HBM 공정 백과 &middot; 6 / 8 COW TEST</footer>
+
+<script src="base.js"></script>
+<script>
+(function(){
+var NS="http://www.w3.org/2000/svg";
+var CX=[82,201,320,439,558], BAD=3, N=CX.length, TOTAL=N+2;
+var dies=document.getElementById("dies"), marks=document.getElementById("marks");
+var probe=document.getElementById("probe"), wave=document.getElementById("wave");
+var cap=document.getElementById("cap"), prog=document.getElementById("prog");
+var bPlay=document.getElementById("bPlay"), bNext=document.getElementById("bNext"), bReset=document.getElementById("bReset");
+function mk(tag,at,par){var e=document.createElementNS(NS,tag);for(var k in at)e.setAttribute(k,at[k]);par.appendChild(e);return e}
+var stacks=[], markEls=[];
+CX.forEach(function(x,i){
+  mk("rect",{x:x-42,y:205,width:84,height:25,rx:4,fill:"#0a84ff"},dies);
+  mk("text",{x:x,y:222,fill:"#fff","font-size":11,"text-anchor":"middle"},dies).textContent="버퍼";
+  var g=mk("g",{"class":"dieset"},dies); g.style.opacity=1;
+  [193,181,169].forEach(function(y,j){
+    mk("rect",{x:x-32,y:y,width:64,height:10,rx:2,fill:(i===BAD&&j===1)?"#ff453a":"#bf5af2",opacity:1-j*.12},g);
+  });
+  stacks.push(g);
+  var m=mk("g",{"class":"mark"},marks); m.style.opacity=0;
+  var ok=i!==BAD;
+  mk("circle",{cx:x+56,cy:150,r:14,fill:ok?"#30d158":"#ff453a"},m);
+  mk("text",{x:x+56,y:156,fill:"#000","font-size":17,"font-weight":700,"text-anchor":"middle"},m).textContent=ok?"✓":"✗";
+  mk("text",{x:x+56,y:132,fill:ok?"#30d158":"#ff453a","font-size":12,"text-anchor":"middle"},m).textContent=ok?"양품":"불량";
+  markEls.push(m);
+});
+var caps=[
+ "준비 상태입니다. 버퍼 다이 웨이퍼 위에 코어 다이 스택이 합쳐진 COW입니다.",
+ "COW 웨이퍼를 테스트 장비에 고정하고 위치를 맞춰 검사를 시작합니다.",
+ "프로브가 첫 번째 위치로 이동해 접점에 닿고 신호를 흘립니다. 파형이 끝까지 정상으로 돌아옵니다.",
+ "두 번째 위치를 검사합니다. 정상 신호가 확인되어 통과입니다.",
+ "세 번째 위치를 검사합니다. 이번에도 통과입니다.",
+ "네 번째 위치를 검사합니다. 신호가 중간에 끊겨 불량으로 표시됩니다. 적층 사이 연결 문제로 볼 수 있습니다.",
+ "다섯 번째 위치도 통과입니다.",
+ "검사가 끝났습니다. 불량 위치가 기록되어, 이후 ASS2 (MPGA SAW)에서 COW를 잘라 스택으로 분리하기 전에 불량 스택을 구분할 수 있습니다."
+];
+var token=0, done=0, busy=false, playing=false;
+function sleep(ms,t){return new Promise(function(res,rej){setTimeout(function(){t===token?res():rej("c")},ms)})}
+function setProbe(x,down){probe.style.transform="translate("+x+"px,"+(down?68:0)+"px)"}
+function wavePath(ok){
+  var p="M40 42",x=40,i=0;
+  while(x<600){
+    var y=(i%2?60:22);
+    if(!ok&&x>300){p+=" L"+x+" 42";}else p+=" L"+x+" "+y;
+    x+=28;i++;
+  }
+  if(!ok)p+=" L600 42";
+  return p;
+}
+function render(n){
+  done=n;
+  markEls.forEach(function(m,i){m.style.opacity=(n>=i+2)?1:0});
+  wave.style.transition="none";wave.style.opacity=0;wave.removeAttribute("stroke-dasharray");wave.removeAttribute("stroke-dashoffset");
+  var last=n>=2&&n<=N+1?CX[n-2]:CX[0];
+  probe.style.transition="none";setProbe(n>=2&&n<=N+1?last:(n>=TOTAL?CX[N-1]:CX[0]),false);
+  void probe.getBoundingClientRect();probe.style.transition="";
+  cap.textContent=caps[n];prog.textContent=n+" / "+TOTAL;
+}
+function ui(){bPlay.textContent=playing?"일시정지":(done>=TOTAL?"다시 재생":"재생");bNext.disabled=false}
+async function runStep(n,t){ // n = step number being run (1..TOTAL)
+  cap.textContent=caps[n];
+  if(n===1){await sleep(1000,t)}
+  else if(n<=N+1){
+    var i=n-2,ok=i!==BAD;
+    setProbe(CX[i],false);await sleep(650,t);
+    setProbe(CX[i],true);await sleep(600,t);
+    var len=1500;wave.setAttribute("d",wavePath(ok));
+    wave.setAttribute("stroke",ok?"#30d158":"#ff453a");
+    wave.style.transition="none";wave.setAttribute("stroke-dasharray",len);wave.setAttribute("stroke-dashoffset",len);wave.style.opacity=1;
+    void wave.getBoundingClientRect();
+    wave.style.transition="stroke-dashoffset 1s linear";wave.setAttribute("stroke-dashoffset",0);
+    await sleep(1100,t);
+    markEls[i].style.opacity=1;await sleep(500,t);
+    wave.style.transition="opacity .3s";wave.style.opacity=0;
+    setProbe(CX[i],false);await sleep(550,t);
+  } else {await sleep(900,t)}
+  if(t!==token)throw "c";
+  render(n);
+}
+async function advance(all){
+  var t=++token;busy=true;playing=all;ui();
+  try{
+    do{ if(done>=TOTAL)break; await runStep(done+1,t);}while(all&&done<TOTAL);
+  }catch(e){ if(e!=="c")throw e; return}
+  if(t===token){busy=false;playing=false;ui()}
+}
+function stop(){token++;busy=false;playing=false;render(done);ui()}
+bPlay.addEventListener("click",function(){
+  if(playing){stop();return}
+  if(busy){token++;busy=false;render(done)}
+  if(done>=TOTAL){token++;render(0)}
+  advance(true);
+});
+bNext.addEventListener("click",function(){
+  if(busy){ // 진행 중인 단계를 즉시 마무리
+    var cur=done+1;token++;busy=false;playing=false;render(Math.min(cur,TOTAL));ui();return;
+  }
+  if(done>=TOTAL){return}
+  advance(false);
+});
+bReset.addEventListener("click",function(){token++;busy=false;playing=false;render(0);ui()});
+render(0);ui();
+})();
+</script>
+</body>
+</html>

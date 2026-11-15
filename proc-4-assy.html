@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ASSY (어셈블리) | HBM 제조 공정 4/8</title>
+<meta name="description" content="HBM 제조 4단계 ASSY. 코어 다이를 쌓고 버퍼 다이 웨이퍼 위에 합쳐 COW(Chip on Wafer)를 만드는 조립 흐름을 설명합니다.">
+<link rel="stylesheet" href="style.css">
+<style>
+.warn{border-left-color:#ff9f0a;background:color-mix(in srgb,#ff9f0a 12%,var(--card))}
+.warn b{color:#ff9f0a}
+.ctrl{display:flex;flex-wrap:wrap;justify-content:center;margin-top:10px}
+.cap{min-height:56px;max-width:640px;text-align:center;color:#d2d2d7;font-size:16px;margin-top:12px}
+.stepno{font-size:13px;color:#a1a1a6;letter-spacing:.08em;margin-top:6px}
+#svg4 .t{transition:opacity .8s var(--ease),transform .8s var(--ease)}
+#svg4 text{font-family:inherit;font-size:12px;fill:#a1a1a6}
+.steps{list-style:none;padding:0;margin-top:24px;display:grid;gap:14px}
+.steps li{background:var(--card);border-radius:20px;padding:20px 24px;box-shadow:0 2px 20px rgba(0,0,0,.06)}
+.steps li p{margin-top:4px}
+</style>
+</head>
+<body>
+<nav class="top">
+<a href="index.html">홈</a>
+<a href="proc-1-fab.html">FAB</a>
+<a href="proc-2-eds.html">EDS</a>
+<a href="proc-3-pfab.html">PFAB</a>
+<a href="proc-4-assy.html" class="on">ASSY</a>
+<a href="proc-5-dbd.html">DBD</a>
+<a href="proc-6-cow-test.html">COW TEST</a>
+<a href="proc-7-ass2-mpga-saw.html">ASS2 (MPGA SAW)</a>
+<a href="proc-8-test.html">TEST</a>
+</nav>
+
+<header class="hero">
+<div class="eyebrow">4 / 8단계 · Assembly</div>
+<h1>ASSY,<br><span class="grad">쌓아서 웨이퍼 위에 합치다</span></h1>
+<p class="lead">코어 다이를 정렬해 쌓고, 버퍼 다이 웨이퍼 위에 합쳐 COW를 만드는 단계입니다.</p>
+</header>
+
+<section class="blk reveal">
+<div class="tip warn"><b>확인 필요</b> ASSY의 정확한 범위(어느 공정까지 포함하는지)는 확정되지 않았습니다. 이 페이지의 설명은 일반적 해석(코어 다이 적층과 버퍼 다이 웨이퍼 위 합체, 즉 COW 형성)에 따른 것이며, 회사나 라인에 따라 범위가 다를 수 있습니다.</div>
+</section>
+
+<section class="blk reveal">
+<div class="num">WHAT</div>
+<h2>이 단계란</h2>
+<p>ASSY는 Assembly, 즉 어셈블리의 약어입니다. HBM에서는 코어 다이를 쌓고, 이를 버퍼 다이(베이스 다이)가 만들어진 웨이퍼 위에 합쳐 COW(Chip on Wafer)를 만드는 조립 단계를 가리킵니다. 앞선 PFAB(Post FAB)에서 TSV와 범프, 후면 가공을 마친 코어 다이를 정렬해 한 층씩 쌓고, 그 스택을 버퍼 다이 웨이퍼 위에 올려 접합하는 흐름을 담습니다. 이렇게 만들어진 COW는 뒤에서 DBD로 캐리어를 분리하고 COW TEST로 검사한 뒤, ASS2 (MPGA SAW)에서 잘라 개별 스택으로 나눕니다. 순서는 ASSY, DBD, COW TEST, ASS2입니다.</p>
+<p style="margin-top:12px">핵심은 다이 사이의 연결입니다. 위아래 다이의 범프가 정확히 맞닿아야 TSV를 통한 신호 통로가 이어집니다. 이를 위해 정렬 정확도가 무엇보다 중요합니다. 또 웨이퍼를 매우 얇게 갈아내기 때문에, 스스로 형태를 지탱하기 어려워 캐리어 웨이퍼에 붙여 다룬다는 맥락도 함께 이해하면 좋습니다. 이 맥락은 다음 단계인 DBD(Debonding)로 이어집니다.</p>
+<div class="grid">
+<div class="card"><div class="num">01</div><h3>적층 준비</h3><p>코어 다이를 쌓을 수 있는 상태로 만들고 취급 방법을 정합니다.</p></div>
+<div class="card"><div class="num">02</div><h3>정렬</h3><p>위아래 다이의 범프 위치를 미세하게 맞춥니다.</p></div>
+<div class="card"><div class="num">03</div><h3>적층과 COW 합체</h3><p>코어 다이를 쌓아 버퍼 다이 웨이퍼 위에 합쳐 COW를 만듭니다.</p></div>
+</div>
+</section>
+
+<section class="blk reveal">
+<div class="num">DETAIL</div>
+<h2>단계별 상세</h2>
+<ol class="steps">
+<li><h3>1. 얇은 웨이퍼를 캐리어에 붙여 취급</h3><p>얇아진 웨이퍼는 휘거나 깨지기 쉽습니다. 그래서 접착층을 사이에 두고 캐리어 웨이퍼에 붙여 안정적으로 다룹니다(캐리어 부착과 박막화는 PFAB와 맞닿은 작업으로, 라인에 따라 어느 단계에 두는지가 다릅니다). 이렇게 붙인 캐리어는 이후 DBD 단계에서 떼어냅니다.</p></li>
+<li><h3>2. 버퍼 다이 웨이퍼와 코어 다이 준비, 정렬</h3><p>스택의 바닥이 될 버퍼 다이 웨이퍼와 쌓을 코어 다이를 준비하고, 쌓을 위치에 맞춰 정렬합니다. 범프의 간격은 매우 미세하여 약간의 어긋남도 연결 불량으로 이어질 수 있습니다.</p></li>
+<li><h3>3. 코어 다이 적층</h3><p>코어 다이를 버퍼 다이 위로 한 층씩 올립니다. 각 층의 범프가 아래 층의 접점과 맞닿도록 열과 압력을 가해 접합하는 방식이 쓰입니다. 구체적인 방식은 제품과 라인에 따라 다릅니다.</p></li>
+<li><h3>4. 층 수만큼 반복하고 COW 완성</h3><p>제품에 따라 쌓는 층 수가 달라집니다. 층이 늘수록 정렬 오차와 열, 두께 관리의 부담이 커집니다. 버퍼 다이 웨이퍼의 각 자리에 코어 다이 스택이 합쳐지면 COW가 완성됩니다.</p></li>
+</ol>
+</section>
+
+<section class="blk reveal">
+<div class="num">ANIMATION</div>
+<h2>쌓이는 모습 보기</h2>
+<p>버퍼 다이 웨이퍼 위에서 코어 다이가 정렬되어 한 층씩 쌓이고, 웨이퍼 위에 합쳐져 COW가 만들어지는 과정입니다. 층 수와 모양은 이해를 돕기 위한 예시입니다.</p>
+<div class="stage" id="stage4">
+<svg id="svg4" viewBox="0 0 640 340" width="640" role="img" aria-label="버퍼 다이 웨이퍼 위에 코어 다이가 정렬되어 한 층씩 쌓이고 COW가 만들어지는 모습">
+<!-- guide lines -->
+<g id="guide" class="t" style="opacity:0">
+<line x1="240" y1="70" x2="240" y2="300" stroke="#bf5af2" stroke-dasharray="4 4"/>
+<line x1="400" y1="70" x2="400" y2="300" stroke="#bf5af2" stroke-dasharray="4 4"/>
+</g>
+<!-- carrier + wafer -->
+<g id="wafer" class="t" style="opacity:0">
+<rect x="60" y="20" width="520" height="22" rx="4" fill="#48484a"/>
+<text x="70" y="35">캐리어 웨이퍼</text>
+<rect x="60" y="42" width="520" height="6" fill="#ff9f0a"/>
+<g id="dies"></g>
+</g>
+<!-- layers -->
+<g id="stack"></g>
+<!-- base die -->
+<rect id="base" x="60" y="290" width="520" height="20" rx="3" fill="#48484a"/>
+<rect x="240" y="290" width="160" height="20" rx="3" fill="#636366"/>
+<rect x="70" y="290" width="100" height="20" rx="3" fill="#636366"/>
+<rect x="470" y="290" width="100" height="20" rx="3" fill="#636366"/>
+<text x="250" y="304" style="fill:#fff">버퍼 다이 웨이퍼</text>
+<text id="lblTop" class="t" x="410" y="190" style="opacity:0">COW (Chip on Wafer)</text>
+</svg>
+<div class="stepno" id="stepno">0 / 7</div>
+<div class="cap" id="cap" aria-live="polite"></div>
+<div class="ctrl">
+<button class="btn" id="bPlay" type="button">재생</button>
+<button class="btn ghost" id="bNext" type="button">다음</button>
+<button class="btn ghost" id="bReset" type="button">리셋</button>
+</div>
+</div>
+</section>
+
+<section class="blk reveal">
+<div class="num">ISSUES</div>
+<h2>주요 이슈</h2>
+<div class="grid">
+<div class="card"><h3>정렬 정확도</h3><p>범프가 어긋나면 신호 통로가 끊기거나 인접 범프와 닿을 수 있습니다.</p></div>
+<div class="card"><h3>얇은 다이의 취급</h3><p>매우 얇아 휨과 파손에 취약하므로 캐리어에 붙여 다루는 과정이 필요합니다.</p></div>
+<div class="card"><h3>열과 압력 관리</h3><p>접합 시 가하는 열과 압력이 다이에 손상을 주지 않도록 조절해야 합니다.</p></div>
+<div class="card"><h3>적층 높이</h3><p>층이 늘수록 전체 두께와 방열 관리의 부담이 커지고, 한 층의 불량이 전체에 영향을 줍니다.</p></div>
+</div>
+</section>
+
+<section class="blk reveal">
+<div class="tip"><b>핵심 포인트</b> ASSY는 코어 다이를 범프로 정렬해 쌓고, 버퍼 다이 웨이퍼 위에 합쳐 COW를 만드는 조립 단계입니다. 합체는 ASS2가 아니라 이 단계에서 이뤄지며, COW TEST는 이미 합쳐진 COW를 검사합니다. ASS2 (MPGA SAW)는 그 COW를 마지막에 잘라 스택으로 분리하는 소잉 단계입니다. 얇은 웨이퍼는 캐리어에 붙여 다루고, 이 캐리어는 다음 단계인 DBD에서 분리됩니다. 범위는 회사와 라인에 따라 다를 수 있습니다.</div>
+</section>
+
+<section class="blk reveal">
+<div class="num">TERMS</div>
+<h2>용어 표</h2>
+<table>
+<thead><tr><th>용어</th><th>뜻</th></tr></thead>
+<tbody>
+<tr><td>ASSY</td><td>Assembly. 코어 다이를 쌓고 버퍼 다이 웨이퍼 위에 합쳐 COW를 만드는 조립 단계</td></tr>
+<tr><td>COW</td><td>Chip on Wafer. 버퍼 다이 웨이퍼 위에 코어 다이 스택이 합쳐진 상태</td></tr>
+<tr><td>범프(Bump)</td><td>다이 사이를 전기적으로 잇는 작은 접점</td></tr>
+<tr><td>TSV</td><td>다이를 수직으로 관통하는 전극 통로</td></tr>
+<tr><td>캐리어 웨이퍼</td><td>얇은 웨이퍼를 지탱하기 위해 붙이는 받침 웨이퍼</td></tr>
+<tr><td>코어 다이</td><td>HBM에서 메모리 셀을 담아 쌓이는 DRAM 다이</td></tr>
+<tr><td>버퍼 다이(베이스 다이)</td><td>스택의 가장 아래에서 제어와 연결을 맡는 다이. ASSY에서는 이 다이의 웨이퍼 위에 코어 다이 스택이 합쳐짐</td></tr>
+<tr><td>DBD</td><td>Debonding. 캐리어 웨이퍼를 떼어내는 단계</td></tr>
+</tbody>
+</table>
+</section>
+
+<div class="pager">
+<a class="btn ghost" href="proc-3-pfab.html">이전 · PFAB</a>
+<a class="btn" href="proc-5-dbd.html">다음 · DBD</a>
+</div>
+<footer>HBM 제조 공정 백과 · 수치와 구성은 일반적 설명이며 제품과 라인에 따라 다를 수 있습니다.</footer>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  var CAPS=[
+    '아래에는 버퍼 다이(베이스 다이)가 만들어진 웨이퍼가 놓여 있습니다. 이 위에 코어 다이 스택이 합쳐질 예정입니다.',
+    'PFAB를 마친 얇은 코어 다이 웨이퍼가 접착층을 통해 캐리어 웨이퍼에 붙어 안정적으로 취급됩니다.',
+    '다이를 쌓을 위치(보라색 점선)에 맞춰 정렬합니다. 범프 위치가 정확히 맞아야 합니다.',
+    '첫 번째 코어 다이가 버퍼 다이 위에 놓입니다.',
+    '두 번째 코어 다이가 올라가 아래 층과 범프로 연결됩니다.',
+    '세 번째 코어 다이가 같은 방식으로 쌓입니다.',
+    '네 번째 코어 다이까지 쌓이면 코어 다이 스택이 버퍼 다이 위에 완성됩니다.',
+    '버퍼 다이 웨이퍼의 나머지 자리에도 스택이 합쳐지면 COW(Chip on Wafer)가 완성됩니다. 이후 DBD, COW TEST를 거쳐 ASS2 (MPGA SAW)에서 잘립니다.'
+  ];
+  var LAST=CAPS.length-1;
+  var wafer=document.getElementById('wafer'),guide=document.getElementById('guide'),
+      dies=document.getElementById('dies'),stack=document.getElementById('stack'),
+      lbl=document.getElementById('lblTop');
+  var colors=['#30d158','#64d2ff','#5e5ce6','#ff375f'];
+  var dieEls=[],layers=[];
+  var i,j,r,c;
+  for(i=0;i<8;i++){
+    r=document.createElementNS(NS,'rect');
+    r.setAttribute('x',70+i*64);r.setAttribute('y',48);r.setAttribute('width',54);r.setAttribute('height',10);
+    r.setAttribute('fill','#8e8e93');r.setAttribute('class','t');dies.appendChild(r);dieEls.push(r);
+  }
+  var side=[];
+  function mk(x0,w,n,i,isSide){
+    var g=document.createElementNS(NS,'g');g.setAttribute('class','t');
+    var y=262-i*28;
+    r=document.createElementNS(NS,'rect');
+    r.setAttribute('x',x0);r.setAttribute('y',y);r.setAttribute('width',w);r.setAttribute('height',16);r.setAttribute('rx',3);
+    r.setAttribute('fill',colors[i]);g.appendChild(r);
+    for(j=0;j<n;j++){
+      c=document.createElementNS(NS,'circle');
+      c.setAttribute('cx',x0+16+j*((w-32)/(n-1)));c.setAttribute('cy',y+19);c.setAttribute('r',4);c.setAttribute('fill','#ff9f0a');g.appendChild(c);
+    }
+    g.style.opacity=0;g.style.transform='translateY(-70px)';
+    stack.appendChild(g);
+    if(isSide)side.push(g);else layers.push(g);
+  }
+  for(i=0;i<4;i++){mk(240,160,5,i,false);}
+  for(i=0;i<4;i++){mk(70,100,3,i,true);mk(470,100,3,i,true);}
+  var s=0,tok=0;
+  function render(n){
+    s=n;
+    wafer.style.opacity=(n>=1&&n<=2)?1:0;
+    guide.style.opacity=(n===2)?1:0;
+    for(var k=0;k<dieEls.length;k++){
+      dieEls[k].style.transform='translateX('+(n===2?(k-3.5)*6:0)+'px)';
+      dieEls[k].setAttribute('fill',n===2?'#bf5af2':'#8e8e93');
+    }
+    for(var m=0;m<layers.length;m++){
+      var on=n>=3+m;
+      layers[m].style.opacity=on?1:0;
+      layers[m].style.transform=on?'translateY(0)':'translateY(-70px)';
+    }
+    for(var q=0;q<side.length;q++){
+      side[q].style.opacity=(n===LAST)?1:0;
+      side[q].style.transform=(n===LAST)?'translateY(0)':'translateY(-70px)';
+    }
+    lbl.style.opacity=(n===LAST)?1:0;
+    document.getElementById('stepno').textContent=n+' / '+LAST;
+    document.getElementById('cap').textContent=CAPS[n];
+  }
+  function sleep(ms,t){
+    return new Promise(function(res){setTimeout(function(){res(t===tok);},ms);});
+  }
+  var playing=false,bPlay=document.getElementById('bPlay');
+  function setPlaying(v){playing=v;bPlay.textContent=v?'일시정지':(s>=LAST?'다시 재생':'재생');}
+  async function play(){
+    if(s>=LAST){render(0);}
+    var my=++tok;
+    setPlaying(true);
+    while(s<LAST){
+      var ok=await sleep(s===0?300:1500,my);
+      if(!ok)return;
+      render(s+1);
+    }
+    var ok2=await sleep(100,my);
+    if(ok2)setPlaying(false);
+  }
+  bPlay.addEventListener('click',function(){
+    if(playing){tok++;setPlaying(false);}else{play();}
+  });
+  document.getElementById('bNext').addEventListener('click',function(){
+    tok++;setPlaying(false);
+    render(s>=LAST?LAST:s+1);
+    setPlaying(false);
+  });
+  document.getElementById('bReset').addEventListener('click',function(){
+    tok++;render(0);setPlaying(false);
+  });
+  render(0);setPlaying(false);
+})();
+</script>
+<script src="base.js"></script>
+</body>
+</html>

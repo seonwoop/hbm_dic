@@ -1,3 +1,4 @@
+[1] 최초 요청
 HBM 반도체 백과사전 Html 만들어줘
 
 Integrated Device Manufacturer 에 취업 준비하는 대학생한테 설명하듯이
@@ -10,6 +11,16 @@ HBM 공정별로 상세페이지 만들어주고, 공정별 애니메이션도 �
 
 5분안에 마무리해줘.
 
----
-(후속 요청)
+[2] 후속 요청 (업로드)
 작업이 다 끝나면 Github 에 업로드하고, 내 프롬프트는 .txt 로 저장하고 접속할 수 있는 링크 제공해줘
+https://github.com/seonwoop/hbm_dic 여기다가 올려줘
+
+[3] 후속 요청 (공정 재구성)
+공정을
+FAB - EDS - PFAB - ASSY - DBD - COW TEST - ASS2 (MPGA SAW) - TEST 로 구분해서 다시 정리해.
+그리고 취준생 파트는 걷어내고 그냥 일반적인 백과사전을 만들어봐
+
+[4] 후속 요청 (용어 정의)
+PFAB 은 Post FAB,
+DBD 은 Debonding
+MPGA SAW 는 버퍼다이에 코어다이를 합치고 나서(Chip on Wafer = COW) 마지막에 자르는거라고 생각하면 돼

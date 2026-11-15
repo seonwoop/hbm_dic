@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PFAB (Post FAB) | HBM 제조 공정 3/8</title>
+<meta name="description" content="HBM 제조 3단계 PFAB. 전공정 이후 웨이퍼 위에 TSV와 범프를 만들고 뒷면을 얇게 가는 과정을 애니메이션으로 살펴봅니다.">
+<link rel="stylesheet" href="style.css">
+<style>
+.ctrl{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:14px}
+.cap{min-height:56px;max-width:640px;text-align:center;color:#d2d2d7;font-size:16px;margin-top:10px;transition:opacity .4s var(--ease)}
+.cap b{color:#fff}
+.dots{display:flex;gap:8px;justify-content:center;margin-top:10px}
+.dots i{width:8px;height:8px;border-radius:50%;background:#48484a;transition:.4s}
+.dots i.on{background:#0a84ff;transform:scale(1.4)}
+#wf svg,svg#pf{width:100%;max-width:680px}
+#pf .mv{transition:transform 1.1s var(--ease),opacity .7s var(--ease)}
+#pf rect.h,#pf rect.cu,#pf rect.si{transition:height 1.1s var(--ease),opacity .7s var(--ease)}
+#pf .fade{transition:opacity .7s var(--ease)}
+.steps{counter-reset:s;display:grid;gap:14px;margin-top:26px}
+.steps .card{display:flex;gap:18px;align-items:flex-start}
+.steps .card .num{min-width:64px;padding-top:4px}
+.steps .card h3{margin-bottom:4px}
+</style>
+</head>
+<body>
+<nav class="top">
+<a href="index.html">홈</a>
+<a href="proc-1-fab.html">FAB</a>
+<a href="proc-2-eds.html">EDS</a>
+<a href="proc-3-pfab.html" class="on">PFAB</a>
+<a href="proc-4-assy.html">ASSY</a>
+<a href="proc-5-dbd.html">DBD</a>
+<a href="proc-6-cow-test.html">COW TEST</a>
+<a href="proc-7-ass2-mpga-saw.html">ASS2 (MPGA SAW)</a>
+<a href="proc-8-test.html">TEST</a>
+</nav>
+
+<header class="hero">
+<div class="eyebrow">HBM 제조 공정 3 / 8</div>
+<h1><span class="grad">PFAB</span></h1>
+<p class="lead">Post FAB. 전공정이 끝난 웨이퍼에 데이터가 위아래로 오가는 길을 내는 단계입니다.</p>
+</header>
+
+<section class="blk reveal">
+<div class="num">01 이 단계란</div>
+<h2>웨이퍼에 수직 통로를 만듭니다</h2>
+<p>PFAB은 Post FAB의 줄임말로, 전공정(FAB)을 마친 뒤 웨이퍼 상태에서 이어가는 후속 공정을 가리킵니다. 회로를 새기는 일은 이미 끝났고, 이제는 칩을 위아래로 쌓을 수 있게 웨이퍼를 가공합니다.</p>
+<p style="margin-top:14px">HBM에서는 이 단계에서 TSV(실리콘 관통 전극) 형성, 범프 형성, 웨이퍼 뒷면 연마(박막화)를 다룹니다. 일반 메모리 칩은 데이터가 가장자리의 선을 통해 나가지만, HBM은 칩 한가운데를 수직으로 뚫어 층과 층을 직접 잇습니다. PFAB은 그 통로를 만드는 단계입니다.</p>
+<div class="grid">
+<div class="card"><div class="num">TSV</div><h3>수직 전극</h3><p>실리콘을 관통하는 미세한 구리 기둥입니다. 위층과 아래층의 신호와 전력이 지나갑니다.</p></div>
+<div class="card"><div class="num">BUMP</div><h3>접점 돌기</h3><p>칩과 칩이 맞닿는 지점에 올리는 작은 금속 돌기입니다. 쌓을 때 서로를 전기적으로 연결합니다.</p></div>
+<div class="card"><div class="num">GRIND</div><h3>뒷면 박막화</h3><p>웨이퍼 뒷면을 갈아 얇게 만들고 TSV 끝을 드러냅니다. 얇아야 높이 쌓을 수 있습니다.</p></div>
+</div>
+</section>
+
+<section class="blk reveal">
+<div class="num">02 단계별 상세</div>
+<h2>구멍, 기둥, 돌기, 그리고 뒤집기</h2>
+<div class="steps">
+<div class="card"><div class="num">STEP 1</div><div><h3>TSV 구멍 뚫기</h3><p>웨이퍼 윗면에서 아래로 가느다란 수직 구멍을 팝니다. 웨이퍼를 완전히 관통시키지는 않고, 일정 깊이까지만 팝니다.</p></div></div>
+<div class="card"><div class="num">STEP 2</div><div><h3>절연 후 구리 채우기</h3><p>구멍 안쪽 벽에 절연막을 입혀 실리콘과 전기가 섞이지 않게 한 다음, 구리로 빈틈없이 채웁니다. 이 구리 기둥이 TSV입니다.</p></div></div>
+<div class="card"><div class="num">STEP 3</div><div><h3>범프 올리기</h3><p>TSV 위쪽에 작은 금속 돌기를 올립니다. 나중에 다른 칩과 포개질 때 접점 역할을 합니다.</p></div></div>
+<div class="card"><div class="num">STEP 4</div><div><h3>캐리어에 붙이고 뒤집기</h3><p>웨이퍼가 얇아지면 쉽게 깨지므로, 범프 쪽 면을 접착제로 캐리어 웨이퍼에 붙여 지지대를 만듭니다. 그 뒤 뒤집어 뒷면이 위로 오게 합니다.</p></div></div>
+<div class="card"><div class="num">STEP 5</div><div><h3>뒷면 갈아내기</h3><p>뒷면을 갈아 웨이퍼를 매우 얇게 만들고, 구리 기둥의 끝이 드러나게 합니다. 이제 TSV가 웨이퍼 위아래를 모두 이어줍니다. 캐리어를 떼는 일은 뒤의 DBD 단계에서 이뤄집니다.</p></div></div>
+</div>
+</section>
+
+<section class="blk reveal">
+<div class="num">03 단면으로 보기</div>
+<h2>웨이퍼 단면 애니메이션</h2>
+<p>재생을 누르면 다섯 단계가 차례로 진행됩니다. 다음 버튼으로 한 단계씩 넘길 수도 있고, 재생 중에 일시정지나 리셋을 눌러도 화면이 깔끔하게 정리됩니다. 그림은 이해를 돕기 위한 개념도이며 실제 비율과 다릅니다.</p>
+<div class="stage" id="stg">
+<svg id="pf" viewBox="0 0 640 320" role="img" aria-label="TSV 형성 과정 웨이퍼 단면 애니메이션">
+<defs>
+<linearGradient id="gSi" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8e9aaf"/><stop offset="1" stop-color="#5f6b82"/></linearGradient>
+<linearGradient id="gCu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb066"/><stop offset="1" stop-color="#e07a2f"/></linearGradient>
+</defs>
+<g id="wg" class="mv" style="transform-box:view-box;transform-origin:320px 170px">
+  <!-- 캐리어와 접착층 (범프 쪽) -->
+  <g id="carr" class="fade" opacity="0">
+    <rect x="110" y="84" width="420" height="20" rx="4" fill="#3a3a3c"/>
+    <rect x="110" y="104" width="420" height="8" fill="#bf5af2" opacity=".55"/>
+  </g>
+  <!-- 범프 -->
+  <g id="bumps" class="fade" opacity="0">
+    <circle cx="180" cy="122" r="9" fill="#d2d2d7"/>
+    <circle cx="270" cy="122" r="9" fill="#d2d2d7"/>
+    <circle cx="370" cy="122" r="9" fill="#d2d2d7"/>
+    <circle cx="460" cy="122" r="9" fill="#d2d2d7"/>
+  </g>
+  <rect class="si" id="si" x="120" y="130" width="400" height="80" fill="url(#gSi)" style="height:80px"/>
+  <rect x="120" y="130" width="400" height="8" fill="#0a84ff" opacity=".8"/>
+  <!-- TSV 구멍 -->
+  <g id="holes">
+    <rect class="h" x="170" y="130" width="20" height="0" fill="#0b0b0d" style="height:0px"/>
+    <rect class="h" x="260" y="130" width="20" height="0" fill="#0b0b0d" style="height:0px"/>
+    <rect class="h" x="360" y="130" width="20" height="0" fill="#0b0b0d" style="height:0px"/>
+    <rect class="h" x="450" y="130" width="20" height="0" fill="#0b0b0d" style="height:0px"/>
+  </g>
+  <g id="cus">
+    <rect class="cu" x="170" y="130" width="20" height="60" fill="url(#gCu)" opacity="0"/>
+    <rect class="cu" x="260" y="130" width="20" height="60" fill="url(#gCu)" opacity="0"/>
+    <rect class="cu" x="360" y="130" width="20" height="60" fill="url(#gCu)" opacity="0"/>
+    <rect class="cu" x="450" y="130" width="20" height="60" fill="url(#gCu)" opacity="0"/>
+  </g>
+  <!-- 연삭 휠 (원래 좌표 기준 아래쪽 = 뒤집으면 위) -->
+  <g id="wheel" class="fade" opacity="0">
+    <rect x="150" y="214" width="340" height="16" rx="6" fill="#ff375f"/>
+    <path d="M200 238l-8 12M280 238l-8 12M360 238l-8 12M440 238l-8 12" stroke="#ff375f" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</g>
+<g font-size="13" fill="#a1a1a6" text-anchor="middle" font-family="sans-serif">
+  <text id="lb1" x="320" y="296" class="fade" opacity="1">웨이퍼 (전공정 완료, 윗면에 회로층)</text>
+</g>
+</svg>
+<div class="dots" id="dots"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div class="cap" id="cap" aria-live="polite"></div>
+<div class="ctrl">
+<button class="btn" id="bPlay" type="button">재생</button>
+<button class="btn ghost" id="bNext" type="button">다음</button>
+<button class="btn ghost" id="bReset" type="button">리셋</button>
+</div>
+</div>
+</section>
+
+<section class="blk reveal">
+<div class="num">04 주요 이슈</div>
+<h2>얇게, 그러나 깨지지 않게</h2>
+<div class="grid">
+<div class="card"><h3>빈틈 없는 채움</h3><p>가늘고 깊은 구멍을 구리로 끝까지 고르게 채우는 일이 까다롭습니다. 안에 빈 공간이 남으면 신호가 끊기거나 열에 약해질 수 있습니다.</p></div>
+<div class="card"><h3>깨지기 쉬운 얇은 웨이퍼</h3><p>갈아낸 웨이퍼는 종이처럼 약해져 휘거나 깨지기 쉽습니다. 그래서 캐리어에 붙여 지지하며, 두께는 약 수십 마이크로미터 수준까지 줄어듭니다.</p></div>
+<div class="card"><h3>균일한 두께</h3><p>웨이퍼 전체에서 두께가 고르지 않으면 이후 적층 높이가 어긋납니다. 갈아내는 양을 정밀하게 맞추는 것이 중요합니다.</p></div>
+<div class="card"><h3>열과 응력</h3><p>구리와 실리콘은 열에 늘어나는 정도가 서로 달라 내부에 힘이 쌓일 수 있습니다. 구조와 공정 조건으로 이를 관리합니다.</p></div>
+</div>
+</section>
+
+<section class="blk reveal">
+<div class="tip"><b>핵심 포인트.</b> PFAB은 회로를 새기는 단계가 아니라, 데이터가 위아래로 오가는 통로를 만드는 단계입니다. TSV, 범프, 뒷면 박막화가 한 세트로 이어져야 칩을 높이 쌓을 수 있습니다.</div>
+<h2 style="margin-top:50px">용어 표</h2>
+<table>
+<thead><tr><th>용어</th><th>뜻</th></tr></thead>
+<tbody>
+<tr><td>PFAB (Post FAB)</td><td>전공정 이후 웨이퍼 레벨에서 진행하는 후속 공정</td></tr>
+<tr><td>TSV</td><td>Through Silicon Via. 실리콘을 수직으로 관통하는 전극</td></tr>
+<tr><td>범프(Bump)</td><td>칩 사이를 전기적으로 잇는 작은 금속 돌기</td></tr>
+<tr><td>박막화(Thinning)</td><td>웨이퍼 뒷면을 갈아 두께를 줄이는 일</td></tr>
+<tr><td>캐리어 웨이퍼</td><td>얇아진 웨이퍼를 임시로 붙여 지지하는 받침 웨이퍼</td></tr>
+<tr><td>절연막</td><td>구리와 실리콘 사이의 전기 접촉을 막는 얇은 막</td></tr>
+</tbody>
+</table>
+</section>
+
+<div class="pager">
+<a class="btn ghost" href="proc-2-eds.html">&larr; 이전: EDS</a>
+<a class="btn" href="proc-4-assy.html">다음: ASSY &rarr;</a>
+</div>
+<footer>HBM 제조 공정 백과 · 수치는 이해를 위한 개략값이며 제품과 공정에 따라 다릅니다.</footer>
+
+<script src="base.js"></script>
+<script>
+(function(){
+  var LAST=5, cur=0, tok=0, playing=false;
+  var caps=[
+    '<b>시작.</b> 전공정을 마친 웨이퍼입니다. 윗면(파란 띠)에 회로가 이미 만들어져 있습니다.',
+    '<b>1. TSV 구멍.</b> 윗면에서 아래로 수직 구멍을 팝니다. 끝까지 뚫지는 않습니다.',
+    '<b>2. 구리 채우기.</b> 절연 후 구멍을 구리로 채웁니다. 이 구리 기둥이 TSV입니다.',
+    '<b>3. 범프 형성.</b> TSV 위에 작은 금속 돌기를 올려 접점을 만듭니다.',
+    '<b>4. 캐리어 부착과 뒤집기.</b> 범프 쪽을 캐리어에 붙이고 웨이퍼를 뒤집어 뒷면이 위로 오게 합니다.',
+    '<b>5. 뒷면 박막화.</b> 뒷면을 갈아 얇게 만들고 TSV 끝을 드러냅니다. 위아래가 이어졌습니다.'
+  ];
+  var labels=[
+    '웨이퍼 (전공정 완료, 윗면에 회로층)','TSV 구멍 형성','구리 충전 완료','범프 형성','캐리어 부착 후 뒤집음','박막화 완료, TSV 끝 노출'
+  ];
+  var $=function(id){return document.getElementById(id)};
+  var wg=$('wg'),si=$('si'),carr=$('carr'),bumps=$('bumps'),wheel=$('wheel'),cap=$('cap'),lb=$('lb1');
+  var holes=document.querySelectorAll('#holes .h'), cus=document.querySelectorAll('#cus .cu');
+  var dots=document.querySelectorAll('#dots i');
+  var bPlay=$('bPlay'),bNext=$('bNext'),bReset=$('bReset');
+
+  // 모든 시각 상태는 단계 번호만으로 결정되므로, 어떤 순서로 호출해도 잔상이 남지 않는다.
+  function setStep(n){
+    cur=n;
+    var hh = n===0?0 : (n>=5?54:60);
+    holes.forEach(function(h){ h.style.height = (n===1?60:0)+'px'; });
+    cus.forEach(function(c){
+      c.style.opacity = n>=2?1:0;
+      c.setAttribute('height', n>=5?54:60);
+    });
+    bumps.setAttribute('opacity', n>=3?1:0);
+    carr.setAttribute('opacity', n>=4?1:0);
+    wheel.setAttribute('opacity', n===5?0.9:0);
+    wg.style.transform = n>=4?'rotate(180deg)':'rotate(0deg)';
+    si.style.height = (n>=5?54:80)+'px';
+    cap.innerHTML = caps[n];
+    lb.textContent = labels[n];
+    dots.forEach(function(d,i){ d.classList.toggle('on', i===n); });
+    bNext.disabled = (n>=LAST);
+    bNext.style.opacity = n>=LAST?.4:1;
+  }
+  function sleep(ms,t){
+    return new Promise(function(res){
+      setTimeout(function(){ res(t===tok); }, ms);
+    });
+  }
+  function setPlayUI(p){
+    playing=p;
+    bPlay.textContent = p?'일시정지':(cur>=LAST?'다시 재생':'재생');
+  }
+  function stop(){ tok++; setPlayUI(false); }
+  async function play(){
+    var t=++tok;
+    if(cur>=LAST) setStep(0);
+    setPlayUI(true);
+    if(cur===0){ if(!(await sleep(700,t))) return; }
+    while(cur<LAST){
+      setStep(cur+1);
+      var ok = await sleep(cur===LAST?900:2200,t);
+      if(!ok) return; // 취소됨: 새 토큰이 이미 UI를 담당
+    }
+    if(t===tok) setPlayUI(false);
+  }
+  bPlay.addEventListener('click',function(){ if(playing) stop(); else play(); });
+  bNext.addEventListener('click',function(){ stop(); if(cur<LAST) setStep(cur+1); setPlayUI(false); });
+  bReset.addEventListener('click',function(){ stop(); setStep(0); setPlayUI(false); });
+  setStep(0); setPlayUI(false);
+})();
+</script>
+</body>
+</html>

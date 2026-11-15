@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>1단계 FAB - HBM 제조 공정 백과</title>
+<meta name="description" content="HBM 제조의 첫 단계, FAB(전공정 웨이퍼 제조). DRAM 회로를 실리콘 웨이퍼 위에 형성하는 과정을 알아봅니다.">
+<link rel="stylesheet" href="style.css">
+<style>
+.ctrl{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:14px}
+.cap{min-height:56px;max-width:640px;text-align:center;color:#f5f5f7;font-size:16px;margin-top:12px}
+.cap b{color:#64d2ff}
+.dots{display:flex;gap:8px;margin-top:10px}
+.dots i{width:8px;height:8px;border-radius:50%;background:#48484a;transition:.4s}
+.dots i.on{background:#64d2ff;transform:scale(1.35)}
+.lay{transition:opacity .6s ease}
+.steps{counter-reset:s;list-style:none;padding:0;margin-top:30px;display:grid;gap:14px}
+.steps li{counter-increment:s;background:var(--card);border-radius:20px;padding:20px 24px 20px 70px;position:relative;box-shadow:0 2px 20px rgba(0,0,0,.06)}
+.steps li::before{content:counter(s);position:absolute;left:22px;top:20px;width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:15px}
+.steps li b{display:block;font-size:18px;margin-bottom:2px}
+.steps li span{color:var(--sub);font-size:16px}
+</style>
+</head>
+<body>
+<nav class="top">
+<a href="index.html">홈</a>
+<a href="proc-1-fab.html" class="on">FAB</a>
+<a href="proc-2-eds.html">EDS</a>
+<a href="proc-3-pfab.html">PFAB</a>
+<a href="proc-4-assy.html">ASSY</a>
+<a href="proc-5-dbd.html">DBD</a>
+<a href="proc-6-cow-test.html">COW TEST</a>
+<a href="proc-7-ass2-mpga-saw.html">ASS2 (MPGA SAW)</a>
+<a href="proc-8-test.html">TEST</a>
+</nav>
+
+<header class="hero">
+<div class="eyebrow">1 / 8 단계</div>
+<h1><span class="grad">FAB</span></h1>
+<p class="lead">Fabrication. DRAM 회로를 실리콘 웨이퍼 위에 형성하는 전공정입니다.</p>
+</header>
+
+<section class="blk reveal">
+<h2>이 단계란</h2>
+<p>HBM은 여러 장의 DRAM 칩을 위로 쌓아 만든 메모리입니다. 그런데 쌓기 전에, 쌓을 칩부터 만들어야 합니다. 그 칩을 만드는 첫 단계가 FAB(팹)입니다. 팹은 &lsquo;Fabrication&rsquo;의 줄임말이자, 반도체 공장 자체를 부르는 말이기도 합니다.</p>
+<p style="margin-top:14px">이 단계에서는 둥근 실리콘 판, 즉 웨이퍼 위에 트랜지스터와 커패시터, 배선을 아주 얇은 층으로 겹겹이 쌓아 DRAM 셀을 만듭니다. 웨이퍼 한 장에는 수백~수천 개의 다이(칩 한 개 분량의 구역)가 동시에 만들어지고, HBM은 훗날 이 다이들을 이후 단계에서 쌓아 올립니다.</p>
+<div class="grid">
+<div class="card"><div class="num">INPUT</div><h3>빈 웨이퍼</h3><p>표면이 매끈하게 가공된 실리콘 원판. 지름 약 300mm가 널리 쓰입니다.</p></div>
+<div class="card"><div class="num">PROCESS</div><h3>층 쌓기 반복</h3><p>막을 입히고, 패턴을 그리고, 깎아내고, 채우는 일을 층마다 되풀이합니다.</p></div>
+<div class="card"><div class="num">OUTPUT</div><h3>DRAM 다이가 가득한 웨이퍼</h3><p>아직 잘리지 않은 채, 수많은 DRAM 다이가 격자처럼 배열된 웨이퍼입니다.</p></div>
+</div>
+</section>
+
+<section class="blk reveal">
+<h2>단계별 상세</h2>
+<p>층 하나를 올리는 기본 흐름은 비슷합니다. 이 흐름을 층마다 반복하면서 회로가 입체로 완성됩니다.</p>
+<ol class="steps">
+<li><b>산화</b><span>웨이퍼 표면에 얇은 산화막(절연막)을 만듭니다. 회로 사이를 전기적으로 가르는 기초가 됩니다.</span></li>
+<li><b>포토(감광액 도포와 노광)</b><span>빛에 반응하는 감광액을 바르고, 회로 도안이 새겨진 마스크를 통해 빛을 쪼여 패턴을 옮깁니다.</span></li>
+<li><b>식각</b><span>감광액이 지켜 주지 않는 부분을 깎아냅니다. 도안이 실제 구조로 바뀌는 순간입니다.</span></li>
+<li><b>증착</b><span>깎아낸 홈에 금속이나 절연 물질을 얇게 입히거나 채웁니다. 배선과 전극이 만들어집니다.</span></li>
+<li><b>이온주입</b><span>특정 영역에 불순물 이온을 넣어 전기적 성질을 조절합니다. 트랜지스터의 동작을 결정하는 단계입니다.</span></li>
+<li><b>평탄화(CMP)</b><span>표면을 화학적, 기계적으로 매끈하게 갈아냅니다. 다음 층을 평평하게 올리기 위한 정리 작업입니다.</span></li>
+</ol>
+<div class="tip"><b>한 번이 아니라 층마다 반복</b><p>위 과정은 한 번으로 끝나지 않습니다. DRAM 한 개를 완성하려면 이런 사이클이 층마다 되풀이되며, 전체 공정은 약 수백 단계에 이르고 몇 달 가까이 걸리는 것으로 알려져 있습니다.</p></div>
+</section>
+
+<section class="blk reveal">
+<h2>층이 올라가는 모습</h2>
+<p>웨이퍼 단면을 단순화해 보여 드립니다. 재생을 누르면 산화막, 감광액, 노광, 식각, 증착 순으로 층이 한 겹씩 올라가고, 마지막에는 웨이퍼를 위에서 본 다이 격자로 바뀝니다.</p>
+<div class="stage">
+<svg id="fabsvg" viewBox="0 0 640 320" width="640" role="img" aria-label="웨이퍼 단면에서 층이 쌓이는 과정을 보여 주는 애니메이션">
+<defs>
+<marker id="ah" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ffd60a"/></marker>
+<clipPath id="wclip"><circle cx="320" cy="160" r="130"/></clipPath>
+</defs>
+
+<g id="cross" class="lay">
+  <!-- silicon: full / etched -->
+  <rect id="siFull" class="lay" x="60" y="220" width="520" height="70" rx="6" fill="#8e8e93"/>
+  <path id="siEtch" class="lay" d="M60 226Q60 220 66 220H200V240H260V220H380V240H440V220H574Q580 220 580 226V284Q580 290 574 290H66Q60 290 60 284Z" fill="#8e8e93" opacity="0"/>
+  <text x="70" y="308" fill="#a1a1a6" font-size="13">실리콘 웨이퍼</text>
+
+  <!-- oxide: full / etched -->
+  <rect id="oxFull" class="lay" x="60" y="200" width="520" height="20" fill="#0a84ff" opacity="0"/>
+  <g id="oxEtch" class="lay" opacity="0" fill="#0a84ff">
+    <rect x="60" y="200" width="140" height="20"/>
+    <rect x="260" y="200" width="120" height="20"/>
+    <rect x="440" y="200" width="140" height="20"/>
+  </g>
+
+  <!-- resist: full / exposed / etched -->
+  <rect id="resFull" class="lay" x="60" y="166" width="520" height="34" fill="#ff6f91" opacity="0"/>
+  <g id="resExp" class="lay" opacity="0">
+    <rect x="200" y="166" width="60" height="34" fill="#ffd60a"/>
+    <rect x="380" y="166" width="60" height="34" fill="#ffd60a"/>
+  </g>
+  <g id="resEtch" class="lay" opacity="0" fill="#ff6f91">
+    <rect x="60" y="166" width="140" height="34"/>
+    <rect x="260" y="166" width="120" height="34"/>
+    <rect x="440" y="166" width="140" height="34"/>
+  </g>
+
+  <!-- exposure: mask + light -->
+  <g id="expo" class="lay" opacity="0">
+    <g fill="#d1d1d6">
+      <rect x="60" y="112" width="140" height="10" rx="2"/>
+      <rect x="260" y="112" width="120" height="10" rx="2"/>
+      <rect x="440" y="112" width="140" height="10" rx="2"/>
+    </g>
+    <text x="68" y="104" fill="#a1a1a6" font-size="13">마스크(회로 도안)</text>
+    <g stroke="#ffd60a" stroke-width="3" marker-end="url(#ah)">
+      <line x1="230" y1="40" x2="230" y2="158"/>
+      <line x1="410" y1="40" x2="410" y2="158"/>
+    </g>
+    <text x="236" y="38" fill="#ffd60a" font-size="13">빛</text>
+  </g>
+
+  <!-- deposition -->
+  <g id="dep" class="lay" opacity="0">
+    <rect x="200" y="200" width="60" height="40" fill="#ff9f0a"/>
+    <rect x="380" y="200" width="60" height="40" fill="#ff9f0a"/>
+    <rect x="200" y="190" width="60" height="10" fill="#ff9f0a"/>
+    <rect x="380" y="190" width="60" height="10" fill="#ff9f0a"/>
+  </g>
+
+  <!-- legend -->
+  <g id="legend" font-size="12" fill="#a1a1a6">
+    <rect x="400" y="262" width="0" height="0"/>
+  </g>
+</g>
+
+<g id="topv" class="lay" opacity="0">
+  <circle cx="320" cy="160" r="132" fill="#2c2c2e" stroke="#8e8e93" stroke-width="3"/>
+  <g id="dies" clip-path="url(#wclip)"></g>
+  <path d="M300 292Q320 300 340 292" stroke="#8e8e93" stroke-width="3" fill="none"/>
+</g>
+</svg>
+<div class="cap" id="cap" aria-live="polite"></div>
+<div class="dots" id="dots"></div>
+<div class="ctrl">
+<button class="btn" id="bPlay" type="button">재생</button>
+<button class="btn ghost" id="bNext" type="button">다음</button>
+<button class="btn ghost" id="bReset" type="button">리셋</button>
+</div>
+</div>
+<p style="font-size:14px">실제 DRAM 셀은 훨씬 복잡한 입체 구조이며, 이 그림은 층이 올라가는 원리만 단순화한 것입니다.</p>
+</section>
+
+<section class="blk reveal">
+<h2>주요 이슈</h2>
+<div class="grid">
+<div class="card"><h3>미세화의 한계</h3><p>회로 선폭이 줄수록 같은 면적에 더 많은 셀을 담을 수 있지만, 빛으로 패턴을 그리는 일이 점점 어려워집니다. 일부 층에는 EUV(극자외선) 노광이 쓰입니다.</p></div>
+<div class="card"><h3>커패시터의 입체화</h3><p>셀 하나가 작아져도 전하를 담을 용량은 유지해야 합니다. 그래서 커패시터를 가늘고 높게 세우는데, 쓰러지지 않게 만드는 것이 큰 과제입니다.</p></div>
+<div class="card"><h3>수율</h3><p>공정이 수백 단계라 작은 먼지나 오차 하나가 다이를 불량으로 만듭니다. 그래서 극도로 깨끗한 클린룸이 필요합니다.</p></div>
+<div class="card"><h3>HBM을 위한 다이</h3><p>HBM에 들어갈 다이는 FAB 이후 PFAB(Post FAB) 단계에서 구멍을 뚫어 연결하는 TSV와 범프를 만들고, 웨이퍼 후면을 얇게 갈아냅니다. 그래서 칩 설계 단계부터 이를 염두에 둡니다.</p></div>
+</div>
+<div class="tip"><b>핵심 포인트</b><p>FAB은 HBM만을 위한 공정이 아니라 DRAM 칩 자체를 만드는 공정입니다. 다만 여기서 만든 수많은 다이가 이후 단계에서 쌓여 HBM이 되고, 버퍼 다이에 코어 다이를 합친 웨이퍼 상태(COW)에서 마지막에 잘린다는 점이 다음 단계들의 출발점입니다.</p></div>
+</section>
+
+<section class="blk reveal">
+<h2>용어 표</h2>
+<table>
+<tr><th>용어</th><th>뜻</th></tr>
+<tr><td>FAB(팹)</td><td>Fabrication의 줄임말. 웨이퍼 위에 회로를 만드는 전공정, 또는 그 공장</td></tr>
+<tr><td>웨이퍼</td><td>반도체를 만드는 바탕이 되는 둥근 실리콘 판</td></tr>
+<tr><td>다이(Die)</td><td>웨이퍼 위에서 칩 한 개가 될 구역</td></tr>
+<tr><td>포토(리소그래피)</td><td>빛으로 회로 도안을 웨이퍼에 옮기는 공정</td></tr>
+<tr><td>감광액(포토레지스트)</td><td>빛을 받으면 성질이 변하는 물질</td></tr>
+<tr><td>식각(Etching)</td><td>패턴대로 불필요한 부분을 깎아내는 공정</td></tr>
+<tr><td>증착(Deposition)</td><td>얇은 막을 입히거나 홈을 채우는 공정</td></tr>
+<tr><td>이온주입</td><td>불순물 이온을 넣어 전기적 성질을 조절하는 공정</td></tr>
+<tr><td>CMP</td><td>화학적, 기계적 연마로 표면을 평탄하게 만드는 공정</td></tr>
+<tr><td>수율</td><td>만든 칩 중 정상 동작하는 칩의 비율</td></tr>
+</table>
+</section>
+
+<div class="pager">
+<a class="btn ghost" href="index.html">&larr; 이전: 홈</a>
+<a class="btn" href="proc-2-eds.html">다음: EDS &rarr;</a>
+</div>
+<footer>HBM 제조 공정 백과 · 1/8 FAB · 수치는 일반적으로 알려진 범위를 단순화한 것입니다.</footer>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var caps=[
+    '<b>빈 웨이퍼</b> 표면이 매끈한 실리콘 원판에서 시작합니다.',
+    '<b>산화막 형성</b> 표면에 얇은 산화막(절연막)을 입힙니다.',
+    '<b>감광액 도포</b> 빛에 반응하는 감광액을 고르게 바릅니다.',
+    '<b>노광</b> 회로 도안이 새겨진 마스크를 통해 빛을 쪼이면, 빛을 받은 부분의 성질이 바뀝니다.',
+    '<b>식각</b> 성질이 바뀐 부분이 제거되고, 그 아래 산화막과 실리콘이 도안대로 깎입니다.',
+    '<b>증착</b> 남은 감광액을 걷어낸 뒤, 깎인 홈을 물질로 채웁니다. 이 사이클을 층마다 반복합니다.',
+    '<b>웨이퍼 위에서 보면</b> 수백~수천 개의 다이가 격자처럼 배열되어 있습니다. HBM은 이 다이를 이후 단계에서 쌓습니다.'
+  ];
+  var LAST=caps.length-1;
+  var step=0, token=0, playing=false;
+
+  // build die grid once
+  var dies=$('dies'), ns='http://www.w3.org/2000/svg', html='';
+  var w=26,h=20,x0=320-132,y0=160-132;
+  for(var y=y0;y<y0+264;y+=h+2){for(var x=x0;x<x0+264;x+=w+2){
+    html+='<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="2" fill="#30d158" opacity=".85"/>';
+  }}
+  dies.innerHTML=html;
+
+  // dots
+  var dots=$('dots'); var dh='';
+  for(var i=0;i<=LAST;i++)dh+='<i></i>';
+  dots.innerHTML=dh;
+  var dotEls=dots.children;
+
+  function op(id,v){$(id).setAttribute('opacity',v?1:0)}
+
+  // render is a pure function of step: no leftover state possible
+  function render(s){
+    step=s;
+    var top=s===LAST;
+    op('cross',!top);
+    $('cross').style.opacity=top?0:1;
+    op('topv',top);
+    op('siFull',s<4);
+    op('siEtch',s>=4);
+    op('oxFull',s>=1&&s<4);
+    op('oxEtch',s>=4);
+    op('resFull',s===2||s===3);
+    op('resExp',s===3);
+    op('resEtch',s===4);
+    op('expo',s===3);
+    op('dep',s===5);
+    // keep cross visible attr consistent
+    $('cross').setAttribute('opacity',top?0:1);
+    $('cap').innerHTML=caps[s];
+    for(var i=0;i<dotEls.length;i++)dotEls[i].className=i===s?'on':'';
+    $('bPlay').textContent=playing?'일시정지':(s===LAST?'다시 재생':'재생');
+  }
+
+  function sleep(ms,t){
+    return new Promise(function(res){
+      setTimeout(function(){res(t===token)},ms);
+    });
+  }
+
+  function stop(){token++;playing=false}
+
+  async function play(){
+    stop();
+    var t=token; playing=true;
+    if(step>=LAST)render(0); else render(step);
+    while(t===token&&step<LAST){
+      var ok=await sleep(2200,t);
+      if(!ok)return;
+      render(step+1);
+    }
+    if(t===token){playing=false;render(step)}
+  }
+
+  $('bPlay').addEventListener('click',function(){
+    if(playing){stop();render(step)}else play();
+  });
+  $('bNext').addEventListener('click',function(){
+    stop();
+    render(step>=LAST?0:step+1);
+  });
+  $('bReset').addEventListener('click',function(){
+    stop();
+    render(0);
+  });
+
+  render(0);
+})();
+</script>
+<script src="base.js"></script>
+</body>
+</html>
